@@ -1,0 +1,66 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model;
+using PetaPoco;
+
+namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
+{
+	public class SchemaInspector
+	{
+		private PetaPoco.Database peta;
+
+		
+
+		public SchemaInspector(PetaPoco.Database petaDb)
+		{
+			this.peta = petaDb;
+		}
+
+
+		public IList<Schema> GetSchemas()
+		{
+			//get schemas
+			List<Schema> schemaList = this.queryForSchemas();
+
+			//get tables for each schema
+			if (schemaList != null && schemaList.Count > 0)
+			{
+				var tableInspector = new TableInspector(this.peta);
+
+				Schema schema = null;
+
+				for (int i = 0; i < schemaList.Count; i++)
+				{
+					schema = schemaList[i];
+
+					schema.Tables = tableInspector.GetTables(schema);
+
+				}
+
+			}
+
+			return schemaList;
+		}
+
+		private List<Schema> queryForSchemas()
+		{
+			//TODO: add description metadata from extended properties
+
+			var sql = new Sql(@"SELECT S.[name] AS SchemaName
+								, S.schema_id AS SchemaId
+								, EP.value AS [Description]
+						FROM sys.schemas AS S
+							LEFT OUTER JOIN sys.extended_properties AS EP
+								ON ( S.schema_id = EP.major_id AND EP.name = 'MS_Description' )
+
+						WHERE S.[name] NOT LIKE 'db_%' 
+							AND S.[name] NOT IN ( 'sys', 'INFORMATION_SCHEMA' ) 
+								
+						ORDER BY S.[name];");
+
+			return this.peta.Fetch<Schema>(sql);
+		}
+	}
+}

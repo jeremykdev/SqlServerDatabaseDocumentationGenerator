@@ -1,0 +1,19 @@
+﻿To Do List
+
+* Support views
+
+* Support indexes
+
+* DONE: Re-factor ColumnInspector query to remove duplicate column records with different descriptions.  One description is probably related to the index, not the table column
+
+* Finish export to HTML
+
+* DONE: In DatabaseHtmlDocumentGenerator replace Write() with WriteEncodedText() to escape reserved entities.
+
+* In HTML documentation link data types to descriptions on MSDN or Technet
+
+
+
+* CSS Classes 
+	.empty-object
+	.no-default
