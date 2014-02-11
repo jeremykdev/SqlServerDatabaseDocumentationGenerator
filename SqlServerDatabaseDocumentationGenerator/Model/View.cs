@@ -8,13 +8,21 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 	public class View :IDbObject
 	{
 
-		//TODO: finish
 
 		public int ViewId { get; set; }
 
+        public string ViewName { get; set; }
+
+        public string Description { get; set; }
+
+        public IList<Column> Columns { get; set; }
+
+        public IList<Index> Indexes { get; set; }
+
+
 		public int ObjectId
 		{
-			get { throw new NotImplementedException(); }
+            get { return this.ViewId; }
 		}
 	}
 }

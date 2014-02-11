@@ -304,6 +304,10 @@ THE SOFTWARE.");
 										hw.RenderBeginTag(HtmlTextWriterTag.Th);
 										hw.Write("Index Type");
 										hw.RenderEndTag(); //th
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("Columns");
+                                        hw.RenderEndTag(); //th
 										
 										hw.RenderEndTag(); //tr
 										hw.RenderEndTag(); //thead
@@ -336,6 +340,10 @@ THE SOFTWARE.");
 											hw.RenderBeginTag(HtmlTextWriterTag.Td);
 											hw.WriteEncodedText(index.IndexTypeDescription);
 											hw.RenderEndTag(); //td
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(String.Join(", ", index.ColumnNames.ToArray()));
+                                            hw.RenderEndTag(); //td
 
 
 											hw.RenderEndTag(); //tr

@@ -13,7 +13,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 
 		public string IndexName { get; set; }
 
-		public IList<Column> Columns { get; set; }
+		public IList<string> ColumnNames { get; set; }
 
 		public string Description { get; set; }
 

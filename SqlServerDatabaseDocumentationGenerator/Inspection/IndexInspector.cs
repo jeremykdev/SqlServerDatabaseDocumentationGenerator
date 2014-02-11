@@ -29,10 +29,37 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 
 
 
-			//TODO: lookup columns
+			//lookup columns
+            if (indexList != null && indexList.Count > 0)
+            {
+                for (int i = 0; i < indexList.Count; i++)
+                {
+                    indexList[i].ColumnNames = this.getIndexColumnNames(indexList[i], parent);
+                }
+
+            }
 
 			return indexList;
 		}
+
+        private IList<string> getIndexColumnNames(Index index, IDbObject parent)
+        {
+            var sql = new Sql(@"SELECT C.[name]
+
+                            FROM sys.indexes AS I  
+ 	                            INNER JOIN sys.index_columns AS IC  	
+		                            ON ( I.index_id = IC.index_id AND I.object_id = IC.object_id )
+	                            INNER JOIN sys.columns AS C
+		                            ON ( C.object_id = IC.object_id AND C.column_id = IC.column_id )
+
+                            WHERE I.object_id = @0
+	                            AND I.index_id = @1
+	
+                            ORDER BY IC.key_ordinal, C.[name];", parent.ObjectId, index.IndexId);
+
+            return this.peta.Fetch<string>(sql); 
+
+        }
 
 
 		private IList<Index> getTableIndexes(Table table)
