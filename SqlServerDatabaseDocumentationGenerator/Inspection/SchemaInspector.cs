@@ -31,6 +31,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 
                 var viewInspector = new ViewInspector(this.peta);
 
+                var sprocInspector = new StoredProcedureInspector(this.peta);
+
 				Schema schema = null;
 
 				for (int i = 0; i < schemaList.Count; i++)
@@ -39,6 +41,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 
 					schema.Tables = tableInspector.GetTables(schema);
                     schema.Views = viewInspector.GetViews(schema);
+                    schema.StoredProcedures = sprocInspector.GetStoredProcedures(schema);
 				}
 
 			}
@@ -57,7 +60,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 							LEFT OUTER JOIN sys.extended_properties AS EP
 								ON ( S.schema_id = EP.major_id AND EP.name = 'MS_Description' )
 
-						WHERE S.[name] NOT LIKE 'db_%' 
+						WHERE S.[name] NOT LIKE 'db__%' 
 							AND S.[name] NOT IN ( 'sys', 'INFORMATION_SCHEMA' ) 
 								
 						ORDER BY S.[name];");
