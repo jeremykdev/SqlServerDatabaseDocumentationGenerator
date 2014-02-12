@@ -181,7 +181,7 @@ THE SOFTWARE.");
 									hw.RenderEndTag(); //th
 
 									hw.RenderBeginTag(HtmlTextWriterTag.Th);
-									hw.Write("Maximum Length");
+									hw.Write("Size");
 									hw.RenderEndTag(); //th
 
 
@@ -229,11 +229,32 @@ THE SOFTWARE.");
 										{
 											hw.WriteEncodedText(" (identity)");
 										}
+
+                                        
+
 										hw.RenderEndTag();  //td
 
 										hw.AddAttribute(HtmlTextWriterAttribute.Class, "text-right");
 										hw.RenderBeginTag(HtmlTextWriterTag.Td);
-										hw.WriteEncodedText(col.MaximumLength.HasValue ? col.MaximumLength.Value.ToString() : String.Empty);
+
+                                        //show precision, scale when appliable, else use maxlength
+                                        if (col.Precision.HasValue && col.Scale.HasValue && col.Precision > 0)
+                                        {
+                                            hw.WriteEncodedText(String.Format("{0},{1}",col.Precision.Value, col.Scale.Value));
+                                        }
+                                        else
+                                        {
+                                            if (col.MaximumLength.HasValue && col.MaximumLength.Value != -1)
+                                            {
+                                                hw.WriteEncodedText(col.MaximumLength.ToString());
+                                            }
+                                            else
+                                            {
+                                                hw.Write("n/a");
+                                            }
+                                        }
+
+
 										hw.RenderEndTag();  //td
 
 
@@ -401,7 +422,7 @@ THE SOFTWARE.");
                                     hw.RenderEndTag(); //th
 
                                     hw.RenderBeginTag(HtmlTextWriterTag.Th);
-                                    hw.Write("Maximum Length");
+                                    hw.Write("Size");
                                     hw.RenderEndTag(); //th
 
 
@@ -450,7 +471,24 @@ THE SOFTWARE.");
 
                                         hw.AddAttribute(HtmlTextWriterAttribute.Class, "text-right");
                                         hw.RenderBeginTag(HtmlTextWriterTag.Td);
-                                        hw.WriteEncodedText(col.MaximumLength.HasValue ? col.MaximumLength.Value.ToString() : String.Empty);
+                                        //show precision, scale when appliable
+                                        if (col.Precision.HasValue && col.Scale.HasValue && col.Precision > 0)
+                                        {
+                                            hw.WriteEncodedText(String.Format("{0},{1}",col.Precision.Value, col.Scale.Value));
+                                        }
+                                        else
+                                        {
+                                            if (col.MaximumLength.HasValue && col.MaximumLength.Value != -1)
+                                            {
+                                                hw.WriteEncodedText(col.MaximumLength.ToString());
+                                            }
+                                            else
+                                            {
+                                                hw.Write("n/a");
+                                            }
+                                        }
+
+
                                         hw.RenderEndTag();  //td
 
 
