@@ -29,6 +29,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 			{
 				var tableInspector = new TableInspector(this.peta);
 
+                var viewInspector = new ViewInspector(this.peta);
+
 				Schema schema = null;
 
 				for (int i = 0; i < schemaList.Count; i++)
@@ -36,7 +38,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 					schema = schemaList[i];
 
 					schema.Tables = tableInspector.GetTables(schema);
-
+                    schema.Views = viewInspector.GetViews(schema);
 				}
 
 			}

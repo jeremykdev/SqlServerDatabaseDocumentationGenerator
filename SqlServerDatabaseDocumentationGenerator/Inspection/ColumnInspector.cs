@@ -26,10 +26,44 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 				result = this.queryForTableColumns(parent as Table);
 			}
 
-			//TODO: support views
+            if (parent is View)
+            {
+                result = this.queryForViewColumns(parent as View);
+            }
 
 			return result;
 		}
+
+        private IList<Column> queryForViewColumns(View view)
+        {
+            var sql = new Sql(@"SELECT C.name AS ColumnName
+						, I.DATA_TYPE AS BaseDataTypeName
+						, CONVERT(INT, C.max_length) AS MaximumLength
+						, C.is_nullable AS AllowNull
+						, CONVERT(INT, C.precision) AS Precision
+						, CONVERT(INT, C.scale) AS Scale
+						, C.object_id AS ColumnId
+						, I.COLUMN_DEFAULT AS DefaultValue
+						, C.is_identity AS IsIdentity
+						, C.is_computed AS IsComputed
+
+					FROM sys.views AS V	
+						INNER JOIN sys.schemas AS S
+							ON ( V.schema_id = S.schema_id )
+						INNER JOIN sys.columns AS C
+							ON ( V.object_id = C.object_id )
+						INNER JOIN sys.types AS Y
+							ON ( Y.user_type_id  = C.user_type_id )
+						INNER JOIN INFORMATION_SCHEMA.COLUMNS AS I
+							ON ( I.TABLE_SCHEMA = S.[name] AND I.TABLE_NAME = V.[name] AND I.COLUMN_NAME = C.[name] )
+					
+					WHERE V.object_id = @0
+ 
+					ORDER BY C.column_id, C.name;", view.ViewId);
+
+
+            return this.peta.Fetch<Column>(sql);
+        }
 
 
 		private List<Column> queryForTableColumns(Table parentTable)

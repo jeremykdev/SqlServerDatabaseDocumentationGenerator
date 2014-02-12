@@ -19,6 +19,14 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 
         public IList<Index> Indexes { get; set; }
 
+        public bool IsIndexedView
+        {
+            get 
+            { 
+                return ( this.Indexes != null && this.Indexes.Count > 0 );
+            }
+         }
+
 
 		public int ObjectId
 		{

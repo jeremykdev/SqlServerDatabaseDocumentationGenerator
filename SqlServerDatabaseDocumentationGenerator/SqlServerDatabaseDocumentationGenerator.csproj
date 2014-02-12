@@ -50,6 +50,7 @@
     <Compile Include="Inspection\IndexInspector.cs" />
     <Compile Include="Inspection\SchemaInspector.cs" />
     <Compile Include="Inspection\TableInspector.cs" />
+    <Compile Include="Inspection\ViewInspector.cs" />
     <Compile Include="Model\Column.cs" />
     <Compile Include="Model\Database.cs" />
     <Compile Include="Model\IDbObject.cs" />

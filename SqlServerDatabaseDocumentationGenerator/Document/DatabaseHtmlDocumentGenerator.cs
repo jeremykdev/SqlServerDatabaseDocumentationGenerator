@@ -162,7 +162,7 @@ THE SOFTWARE.");
 
 
 
-									hw.AddAttribute(HtmlTextWriterAttribute.Class, "table table-striped table-condensed");
+                                    hw.AddAttribute(HtmlTextWriterAttribute.Class, "table table-bordered table-striped table-condensed");
 									hw.RenderBeginTag(HtmlTextWriterTag.Table);
 									
 									if (!String.IsNullOrWhiteSpace(table.Description))
@@ -275,7 +275,7 @@ THE SOFTWARE.");
 
 									if (hasIndexes)
 									{
-										hw.AddAttribute(HtmlTextWriterAttribute.Class, "table table-striped table-condensed");
+                                        hw.AddAttribute(HtmlTextWriterAttribute.Class, "table table-bordered table-striped table-condensed");
 										hw.RenderBeginTag(HtmlTextWriterTag.Table);
 
 										hw.RenderBeginTag(HtmlTextWriterTag.Caption);
@@ -361,8 +361,134 @@ THE SOFTWARE.");
 
 								} //end for table loop
 
+
+
+                               
+
+
 							}
 
+
+                            if (schema.Views != null && schema.Views.Count > 0)
+                            {
+                                for (int v = 0; v < schema.Views.Count; v++)
+                                {
+                                    var view = schema.Views[v];
+
+                                    hw.RenderBeginTag(HtmlTextWriterTag.H3);
+                                    hw.WriteEncodedText(String.Format("{0}.{1} (view)", schema.SchemaName, view.ViewName));
+                                    hw.RenderEndTag(); //h3
+
+                                    //TODO: add columns and indexes for view, use view.Description as table caption
+                                    hw.AddAttribute(HtmlTextWriterAttribute.Class, "table table-bordered table-striped table-condensed");
+                                    hw.RenderBeginTag(HtmlTextWriterTag.Table);
+
+                                    if (!String.IsNullOrWhiteSpace(view.Description))
+                                    {
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Caption);
+                                        hw.WriteEncodedText(view.Description);
+                                        hw.RenderEndTag(); //caption
+                                    }
+
+
+                                    hw.RenderBeginTag(HtmlTextWriterTag.Thead);
+                                    hw.RenderBeginTag(HtmlTextWriterTag.Tr);
+
+                                    hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                    hw.Write("Column Name");
+                                    hw.RenderEndTag(); //th
+
+                                    hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                    hw.Write("System Data Type");
+                                    hw.RenderEndTag(); //th
+
+                                    hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                    hw.Write("Maximum Length");
+                                    hw.RenderEndTag(); //th
+
+
+                                    hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                    hw.Write("Allow Null");
+                                    hw.RenderEndTag(); //th
+
+                                    hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                    hw.Write("Default");
+                                    hw.RenderEndTag(); //th
+
+                                    hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                    hw.Write("Is Computed");
+                                    hw.RenderEndTag(); //th
+
+
+                                   
+                                    hw.RenderEndTag(); //tr
+
+                                    hw.RenderEndTag(); //thead
+
+
+                                    hw.RenderBeginTag(HtmlTextWriterTag.Tbody);
+
+                                    for (int c = 0; c < view.Columns.Count; c++)
+                                    {
+
+
+                                        var col = view.Columns[c];
+
+                                        bool colHasDefaultValue = (col.DefaultValue != null);
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Tr);
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                        hw.WriteEncodedText(col.ColumnName);
+                                        hw.RenderEndTag();  //td
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                        hw.WriteEncodedText(col.BaseDataTypeName);
+                                        if (col.IsIdentity)
+                                        {
+                                            hw.WriteEncodedText(" (identity)");
+                                        }
+                                        hw.RenderEndTag();  //td
+
+                                        hw.AddAttribute(HtmlTextWriterAttribute.Class, "text-right");
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                        hw.WriteEncodedText(col.MaximumLength.HasValue ? col.MaximumLength.Value.ToString() : String.Empty);
+                                        hw.RenderEndTag();  //td
+
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                        hw.WriteEncodedText(col.AllowNull.ToYesNo());
+                                        hw.RenderEndTag(); //td
+
+
+
+                                        if (!colHasDefaultValue)
+                                        {
+                                            hw.AddAttribute(HtmlTextWriterAttribute.Class, "no-default");
+                                        }
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                        hw.WriteEncodedText(colHasDefaultValue ? col.DefaultValue : "none");
+                                        hw.RenderEndTag(); //td
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                        hw.WriteEncodedText(col.IsComputed.ToYesNo());
+                                        hw.RenderEndTag(); //td
+
+                                      
+
+                                        hw.RenderEndTag(); //tr
+
+                                    } //for column loop
+
+                                    hw.RenderEndTag(); //tbody
+
+                                    hw.RenderEndTag(); //table
+
+                                } //end views loop
+
+
+                            }//end views
 
 						}// end for schema loop
 

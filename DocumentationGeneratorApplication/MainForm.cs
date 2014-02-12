@@ -21,7 +21,7 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 
 			//Server=.; Database=AdventureWorks; Integrated Security=true;
 
-			this.txtConnectionString.Text = @"Data Source=localhost; Initial Catalog=AdventureWorks; Integrated Security=true;";
+			this.txtConnectionString.Text = @"Data Source=localhost\sqlexpress; Initial Catalog=AdventureWorks; Integrated Security=true;";
 
 			this.txtDocFile.Text = "documentation.html";
 
@@ -31,6 +31,10 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 		private void btnGenerateDoc_Click(object sender, EventArgs e)
 		{
 			//TODO: validate input
+
+            this.btnGenerateDoc.Enabled = false;
+
+            
 
 			var dbi = new DatabaseInspector(this.txtConnectionString.Text);
 			var metadata = dbi.GetDatabaseMetaData();
@@ -48,6 +52,8 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 			{
 				Process.Start(docFilePath);
 			}
+
+            this.btnGenerateDoc.Enabled = true;
 		}
 	}
 }

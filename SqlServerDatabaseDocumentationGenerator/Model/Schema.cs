@@ -15,6 +15,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 
 		public IList<Table> Tables { get; set; }
 
+        public IList<View> Views { get; set; }
+
 		public int ObjectId { get { return this.SchemaId; } }
 	}
 }
