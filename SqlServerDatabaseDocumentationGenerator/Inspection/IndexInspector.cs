@@ -20,16 +20,9 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 		{
 			IList<Index> indexList = null;
 
-			if (parent is Table)
-			{
-				indexList = this.getTableIndexes(parent as Table);
-			}
-
-			//TODO: support views
-
-
-
-			//lookup columns
+			indexList = this.getTableOrViewIndexes(parent);
+		
+   			//lookup columns
             if (indexList != null && indexList.Count > 0)
             {
                 for (int i = 0; i < indexList.Count; i++)
@@ -62,7 +55,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
         }
 
 
-		private IList<Index> getTableIndexes(Table table)
+		private IList<Index> getTableOrViewIndexes(IDbObject parent)
 		{
 	
 			var sql = new Sql(@"SELECT I.[name] AS IndexName
@@ -79,7 +72,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 							WHERE object_id = @0
 								AND I.index_id != 0
 
-							ORDER BY I.[name];", table.TableId);
+							ORDER BY I.[name];", parent.ObjectId);
 
 			return this.peta.Fetch<Index>(sql);
 		}

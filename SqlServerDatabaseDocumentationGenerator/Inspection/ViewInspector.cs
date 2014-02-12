@@ -27,19 +27,18 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
             {
                 var columnInspector = new ColumnInspector(this.peta);
 
+                var indexInspector = new IndexInspector(this.peta);
+
                 for (int v = 0; v < viewList.Count; v++)
                 {
                    var view = viewList[v];
 
                     view.Columns = columnInspector.GetColumns(view);
 
+                    view.Indexes = indexInspector.GetIndexes(view);
+
                 }
 
-                //TODO: get view columns
-
-
-
-                //TODO: get view indexes
             }
 
 

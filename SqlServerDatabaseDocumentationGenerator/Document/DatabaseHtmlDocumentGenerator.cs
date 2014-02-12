@@ -12,11 +12,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Document
 	{
 			
 
-
-
-
-
-			//TODO: what to return
+			
 			public string ExportToHtml(Database db, TextWriter textWriter)
 			{
 				//var sw = new StringWriter();
@@ -375,6 +371,8 @@ THE SOFTWARE.");
                                 {
                                     var view = schema.Views[v];
 
+                                   
+
                                     hw.RenderBeginTag(HtmlTextWriterTag.H3);
                                     hw.WriteEncodedText(String.Format("{0}.{1} (view)", schema.SchemaName, view.ViewName));
                                     hw.RenderEndTag(); //h3
@@ -484,6 +482,87 @@ THE SOFTWARE.");
                                     hw.RenderEndTag(); //tbody
 
                                     hw.RenderEndTag(); //table
+
+
+                                    if (view.IsIndexedView)
+                                    {
+                                        hw.AddAttribute(HtmlTextWriterAttribute.Class, "table table-bordered table-striped table-condensed");
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Table);
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Caption);
+                                        hw.WriteEncodedText(String.Format("Indexes on {0}", view.ViewName));
+                                        hw.RenderEndTag(); //caption
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Thead);
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Tr);
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("Index Name");
+                                        hw.RenderEndTag(); //th
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("Description");
+                                        hw.RenderEndTag(); //th
+
+                                    
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("Is Unique");
+                                        hw.RenderEndTag(); //th
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("Index Type");
+                                        hw.RenderEndTag(); //th
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("Columns");
+                                        hw.RenderEndTag(); //th
+
+                                        hw.RenderEndTag(); //tr
+                                        hw.RenderEndTag(); //thead
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Tbody);
+
+                                        for (int i = 0; i < view.Indexes.Count; i++)
+                                        {
+                                            var index = view.Indexes[i];
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Tr);
+
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(index.IndexName);
+                                            hw.RenderEndTag(); //td
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(index.Description);
+                                            hw.RenderEndTag(); //td
+
+                                            
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(index.IsUnique.ToYesNo());
+                                            hw.RenderEndTag(); //td
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(index.IndexTypeDescription);
+                                            hw.RenderEndTag(); //td
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(String.Join(", ", index.ColumnNames.ToArray()));
+                                            hw.RenderEndTag(); //td
+
+
+                                            hw.RenderEndTag(); //tr
+                                        }
+
+                                        hw.RenderEndTag(); //tbody
+
+                                        hw.RenderEndTag(); //table
+
+
+                                    } //end indexes
+
 
                                 } //end views loop
 
