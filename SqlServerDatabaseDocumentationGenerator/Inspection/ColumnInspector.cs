@@ -38,7 +38,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
         {
             var sql = new Sql(@"SELECT C.name AS ColumnName
 						, I.DATA_TYPE AS BaseDataTypeName
-						, CONVERT(INT, C.max_length) AS MaximumLength
+						, I.CHARACTER_MAXIMUM_LENGTH AS MaximumLength
 						, C.is_nullable AS AllowNull
 						, CONVERT(INT, C.precision) AS Precision
 						, CONVERT(INT, C.scale) AS Scale
@@ -74,7 +74,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 			var sql = new Sql(@"SELECT C.name AS ColumnName
 						, EP.value AS [Description]
 						, I.DATA_TYPE AS BaseDataTypeName
-						, CONVERT(INT, C.max_length) AS MaximumLength
+						, I.CHARACTER_MAXIMUM_LENGTH AS MaximumLength
 						, C.is_nullable AS AllowNull
 						, CONVERT(INT, C.precision) AS Precision
 						, CONVERT(INT, C.scale) AS Scale

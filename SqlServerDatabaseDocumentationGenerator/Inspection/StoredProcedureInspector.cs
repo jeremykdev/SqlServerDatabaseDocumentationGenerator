@@ -23,7 +23,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 
             spList = this.queryForStoredProcedures(schema);
             
-            if (spList != null && spList.Count < 0)
+            if (spList != null && spList.Count > 0)
             {
                 var parameterInspector = new ParameterInspector(this.peta);
 
@@ -56,17 +56,5 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
         }
 
 
-/*
-       SELECT 
-	SP.[name] AS ProcedureName
-	, SP.object_id AS ProcedureId
-	, EP.value AS [Description]
-	
-FROM sys.procedures AS SP
-	LEFT OUTER JOIN sys.extended_properties AS EP
-		ON ( EP.class = 1 AND EP.name = 'MS_Description' AND EP.major_id = SP.object_id AND EP.minor_id = 0 )
-	
-ORDER BY SP.[name];
- * */
     }
 }

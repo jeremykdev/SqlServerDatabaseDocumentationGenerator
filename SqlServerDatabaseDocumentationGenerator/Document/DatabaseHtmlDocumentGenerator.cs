@@ -278,7 +278,7 @@ THE SOFTWARE.");
 										hw.RenderEndTag(); //td
 
 										hw.RenderBeginTag(HtmlTextWriterTag.Td);
-										hw.WriteEncodedText(col.Description);
+										hw.WriteEncodedText(col.Description ?? String.Empty);
 										hw.RenderEndTag(); //td
 
 										hw.RenderEndTag(); //tr
@@ -343,7 +343,7 @@ THE SOFTWARE.");
 											hw.RenderEndTag(); //td
 
 											hw.RenderBeginTag(HtmlTextWriterTag.Td);
-											hw.WriteEncodedText(index.Description);
+											hw.WriteEncodedText(index.Description ?? String.Empty);
 											hw.RenderEndTag(); //td
 
 											hw.RenderBeginTag(HtmlTextWriterTag.Td);
@@ -573,7 +573,7 @@ THE SOFTWARE.");
                                             hw.RenderEndTag(); //td
 
                                             hw.RenderBeginTag(HtmlTextWriterTag.Td);
-                                            hw.WriteEncodedText(index.Description);
+                                            hw.WriteEncodedText(index.Description ?? String.Empty);
                                             hw.RenderEndTag(); //td
 
                                             
@@ -606,6 +606,136 @@ THE SOFTWARE.");
 
 
                             }//end views
+
+
+
+                            if (schema.StoredProcedures != null && schema.StoredProcedures.Count > 0)
+                            {
+                                for (int r = 0; r < schema.StoredProcedures.Count; r++)
+                                {
+                                    var sproc = schema.StoredProcedures[r];
+
+                                    hw.RenderBeginTag(HtmlTextWriterTag.H3);
+                                    hw.WriteEncodedText(String.Format("{0}.{1} (stored procedure)", schema.SchemaName,sproc.ProcedureName) );
+                                    hw.RenderEndTag(); //h3
+
+                                    if (!String.IsNullOrWhiteSpace(sproc.Description))
+                                    {
+                                        hw.RenderBeginTag(HtmlTextWriterTag.P);
+                                        hw.WriteEncodedText(sproc.Description);
+                                        hw.RenderEndTag(); //p
+                                    }
+
+                                    if (sproc.Parameters != null && sproc.Parameters.Count > 0)
+                                    {
+                                        hw.AddAttribute(HtmlTextWriterAttribute.Class, "table table-bordered table-striped table-condensed");
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Table);
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Caption);
+                                        hw.Write("Parameters");
+                                        hw.RenderEndTag();//caption
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Thead);
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Tr);
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("Paramater Name");
+                                        hw.RenderEndTag(); //th
+
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("System Data Type");
+                                        hw.RenderEndTag(); //th
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("Size");
+                                        hw.RenderEndTag(); //th
+
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("Direction");
+                                        hw.RenderEndTag(); //th
+                                        
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("Description");
+                                        hw.RenderEndTag(); //th
+
+                                        hw.RenderEndTag(); //tr
+
+                                        hw.RenderEndTag(); //thead
+
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Tbody);
+
+                                        for (int m = 0; m < sproc.Parameters.Count; m++)
+                                        {
+                                            var param = sproc.Parameters[m];
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Tr);
+
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(param.ParameterName);
+                                            hw.RenderEndTag(); //td
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(param.DataType);
+                                            hw.RenderEndTag(); //td
+
+
+                                            hw.AddAttribute(HtmlTextWriterAttribute.Class, "text-right");
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            //show precision, scale when appliable
+                                            if (param.Precision.HasValue && param.Scale.HasValue && param.Precision > 0)
+                                            {
+                                                hw.WriteEncodedText(String.Format("{0},{1}", param.Precision.Value, param.Scale.Value));
+                                            }
+                                            else
+                                            {
+                                                if (param.MaximumLength.HasValue && param.MaximumLength.Value != -1)
+                                                {
+                                                    hw.WriteEncodedText(param.MaximumLength.ToString());
+                                                }
+                                                else
+                                                {
+                                                    hw.Write("n/a");
+                                                }
+                                            }
+
+                                          
+                                            hw.RenderEndTag(); //td
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(param.Direction);
+                                            hw.RenderEndTag(); //td
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(param.Description ?? String.Empty);
+                                            hw.RenderEndTag(); //td
+
+                                            hw.RenderEndTag(); //tr
+
+                                        } //end parameter loop
+
+
+                                        hw.RenderEndTag(); //tbody
+
+                                        hw.RenderEndTag(); //table
+
+
+
+                                    }  //end sproc parameters
+
+
+                                } //end sproc loop
+
+
+
+                            }// end stored procedures
+
+
+
 
 						}// end for schema loop
 

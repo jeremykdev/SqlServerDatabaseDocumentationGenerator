@@ -34,6 +34,8 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 
             this.btnGenerateDoc.Enabled = false;
 
+
+            //TODO: report db connection failures
             
 
 			var dbi = new DatabaseInspector(this.txtConnectionString.Text);
