@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model;
 
 namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Document
 {
@@ -17,6 +18,37 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Document
 
 			return "No";
 		}
+
+        /// <summary>
+        /// Create reader friendly text for display of a functon return value
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public static string GetReturnTypeDisplayText(this ScalarFunction func)
+        {
+            var dispText = new StringBuilder();
+
+            if (!String.IsNullOrWhiteSpace(func.ReturnDataType))
+            {
+                dispText.Append(func.ReturnDataType);
+            }
+
+            //has numeric precision and scale
+            if (func.ReturnTypePrecision.HasValue && func.ReturnTypeScale.HasValue)
+            {
+                dispText.Append(String.Format("({0},{1})", func.ReturnTypePrecision.Value, func.ReturnTypeScale.Value));
+            }
+            else
+            {
+                if (func.ReturnTypeMaximumLength.HasValue && func.ReturnTypeMaximumLength != -1)
+                {
+                    dispText.Append(String.Format("({0})", func.ReturnTypeMaximumLength.Value));
+                }
+            }
+
+            return dispText.ToString();
+
+        }
 
 	}
 }

@@ -66,7 +66,7 @@ THE SOFTWARE.");
 
 					hw.RenderBeginTag(HtmlTextWriterTag.H1);
 
-					hw.WriteEncodedText(String.Format("Database: {0}", db.DatabaseName));
+					hw.WriteEncodedText(String.Format("{0} Database", db.DatabaseName));
 
 					hw.RenderEndTag(); //h1
 
@@ -81,7 +81,7 @@ THE SOFTWARE.");
 
 
 							hw.RenderBeginTag(HtmlTextWriterTag.H2);
-							hw.WriteEncodedText(String.Format("Schema: {0}", schema.SchemaName));
+							hw.WriteEncodedText(String.Format("{0} (schema)", schema.SchemaName));
 							hw.RenderEndTag(); //h2
 
 							if (!String.IsNullOrWhiteSpace(schema.Description))
@@ -91,7 +91,8 @@ THE SOFTWARE.");
 								hw.RenderEndTag(); //p
 
 							}
-							
+
+                            hw.AddAttribute(HtmlTextWriterAttribute.Class, "table table-bordered table-striped table-condensed schema-objects-list-container");
 							hw.RenderBeginTag(HtmlTextWriterTag.Table);
 
 							hw.RenderBeginTag(HtmlTextWriterTag.Thead);
@@ -118,7 +119,6 @@ THE SOFTWARE.");
 							hw.Write("Tables");
 							hw.RenderEndTag(); //td
 
-
 							hw.AddAttribute(HtmlTextWriterAttribute.Class, "text-right");
 							hw.RenderBeginTag(HtmlTextWriterTag.Td);
 							if (hasTables)
@@ -134,6 +134,77 @@ THE SOFTWARE.");
 
 
 							hw.RenderEndTag(); //tr
+
+
+                            hw.RenderBeginTag(HtmlTextWriterTag.Tr);
+
+                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                            hw.Write("Views");
+                            hw.RenderEndTag(); //td
+
+                            hw.AddAttribute(HtmlTextWriterAttribute.Class, "text-right");
+                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                            if (schema.Views != null)
+                            {
+                                hw.WriteEncodedText(schema.Views.Count.ToString());
+                            }
+                            else
+                            {
+                                hw.Write("0");
+                            }
+
+                            hw.RenderEndTag(); //td
+
+
+                            hw.RenderEndTag(); //tr
+
+
+
+
+                            hw.RenderBeginTag(HtmlTextWriterTag.Tr);
+
+                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                            hw.Write("Stored procedures");
+                            hw.RenderEndTag(); //td
+
+                            hw.AddAttribute(HtmlTextWriterAttribute.Class, "text-right");
+                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                            if (schema.StoredProcedures != null)
+                            {
+                                hw.WriteEncodedText(schema.StoredProcedures.Count.ToString());
+                            }
+                            else
+                            {
+                                hw.Write("0");
+                            }
+
+                            hw.RenderEndTag(); //td
+
+
+                            hw.RenderEndTag(); //tr
+
+
+                            hw.RenderBeginTag(HtmlTextWriterTag.Tr);
+
+                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                            hw.Write("Scalar functions");
+                            hw.RenderEndTag(); //td
+
+                            hw.AddAttribute(HtmlTextWriterAttribute.Class, "text-right");
+                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                            if (schema.ScalarFunctions != null)
+                            {
+                                hw.WriteEncodedText(schema.ScalarFunctions.Count.ToString());
+                            }
+                            else
+                            {
+                                hw.Write("0");
+                            }
+
+                            hw.RenderEndTag(); //td
+
+
+                            hw.RenderEndTag(); //tr
 
 							hw.RenderEndTag(); //tbody
 
@@ -736,6 +807,133 @@ THE SOFTWARE.");
 
 
 
+                            if (schema.ScalarFunctions != null && schema.ScalarFunctions.Count > 0)
+                            {
+                                for (int f = 0; f < schema.ScalarFunctions.Count; f++)
+                                {
+                                    var func = schema.ScalarFunctions[f];
+
+                                    hw.RenderBeginTag(HtmlTextWriterTag.H3);
+                                    hw.WriteEncodedText(String.Format("{0}.{1} (scalar function)", schema.SchemaName, func.FunctionName));
+                                    hw.RenderEndTag(); //h3
+
+                                    if (!String.IsNullOrWhiteSpace(func.Description))
+                                    {
+                                        hw.RenderBeginTag(HtmlTextWriterTag.P);
+                                        hw.WriteEncodedText(func.Description);
+                                        hw.RenderEndTag(); //p
+                                    }
+
+                                    if (!String.IsNullOrEmpty(func.ReturnDataType))
+                                    {
+
+                                        
+                                        hw.RenderBeginTag(HtmlTextWriterTag.P);
+                                        hw.Write("Returns ");
+                                        hw.AddAttribute(HtmlTextWriterAttribute.Class, "return-type");
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Span);
+                                        hw.WriteEncodedText(func.GetReturnTypeDisplayText());
+                                        hw.RenderEndTag(); //span
+                                        hw.RenderEndTag(); //p
+
+                                    }
+                                   
+
+                                    if (func.Parameters != null && func.Parameters.Count > 0)
+                                    {
+                                        hw.AddAttribute(HtmlTextWriterAttribute.Class, "table table-bordered table-striped table-condensed");
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Table);
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Caption);
+                                        hw.Write("Parameters");
+                                        hw.RenderEndTag();//caption
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Thead);
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Tr);
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("Paramater Name");
+                                        hw.RenderEndTag(); //th
+
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("System Data Type");
+                                        hw.RenderEndTag(); //th
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("Size");
+                                        hw.RenderEndTag(); //th
+
+
+                                       
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("Description");
+                                        hw.RenderEndTag(); //th
+
+                                        hw.RenderEndTag(); //tr
+
+                                        hw.RenderEndTag(); //thead
+
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Tbody);
+
+                                        for (int m = 0; m < func.Parameters.Count; m++)
+                                        {
+                                            var param = func.Parameters[m];
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Tr);
+
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(param.ParameterName);
+                                            hw.RenderEndTag(); //td
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(param.DataType);
+                                            hw.RenderEndTag(); //td
+
+
+                                            hw.AddAttribute(HtmlTextWriterAttribute.Class, "text-right");
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            //show precision, scale when appliable
+                                            if (param.Precision.HasValue && param.Scale.HasValue && param.Precision > 0)
+                                            {
+                                                hw.WriteEncodedText(String.Format("{0},{1}", param.Precision.Value, param.Scale.Value));
+                                            }
+                                            else
+                                            {
+                                                if (param.MaximumLength.HasValue && param.MaximumLength.Value != -1)
+                                                {
+                                                    hw.WriteEncodedText(param.MaximumLength.ToString());
+                                                }
+                                               
+                                            }
+                                            
+                                            hw.RenderEndTag(); //td
+                                            
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(param.Description ?? String.Empty);
+                                            hw.RenderEndTag(); //td
+
+                                            hw.RenderEndTag(); //tr
+
+                                        } //end scalar func parameter loop
+
+
+                                        hw.RenderEndTag(); //tbody
+
+                                        hw.RenderEndTag(); //table
+
+
+
+                                    } //end scalar params
+                                }
+
+
+                            } //end scalar functions
+
 
 						}// end for schema loop
 
@@ -760,6 +958,8 @@ THE SOFTWARE.");
 				caption { text-align: left; }
 				h3 { margin-top: 3em; }
 				.no-default { font-style: italic; }
+                .return-type { font-weight: bold; }
+                .schema-objects-list-container { width: 40%; min-width: 200px }
 				";
 
 
