@@ -33,11 +33,14 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 
 				var indexInspector = new IndexInspector(this.peta);
 
+                var foreignKeyInspector = new ForeignKeyInspector(this.peta);
+
 				for (int i = 0; i < tableList.Count; i++)
 				{
 					table = tableList[i];
 					table.Columns = columnInspector.GetColumns(table);
 					table.Indexes = indexInspector.GetIndexes(table);
+                    table.ForeignKeys = foreignKeyInspector.GetForeignKeys(table);
 				}
 
 			}

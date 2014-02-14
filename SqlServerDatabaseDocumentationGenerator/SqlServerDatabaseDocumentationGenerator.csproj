@@ -47,6 +47,7 @@
     <Compile Include="Document\FormattingExtensionMethod.cs" />
     <Compile Include="Inspection\ColumnInspector.cs" />
     <Compile Include="Inspection\DatabaseInspector.cs" />
+    <Compile Include="Inspection\ForeignKeyInspector.cs" />
     <Compile Include="Inspection\IndexInspector.cs" />
     <Compile Include="Inspection\ParameterInspector.cs" />
     <Compile Include="Inspection\ScalarFunctionInspector.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Inspection\ViewInspector.cs" />
     <Compile Include="Model\Column.cs" />
     <Compile Include="Model\Database.cs" />
+    <Compile Include="Model\ForeignKey.cs" />
     <Compile Include="Model\IDbObject.cs" />
     <Compile Include="Model\IDbRoutine.cs" />
     <Compile Include="Model\Index.cs" />

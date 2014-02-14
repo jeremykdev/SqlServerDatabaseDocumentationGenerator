@@ -468,6 +468,61 @@ THE SOFTWARE.");
 
 
 
+                                    if (table.ForeignKeys != null && table.ForeignKeys.Count > 0)
+                                    {
+                                        hw.AddAttribute(HtmlTextWriterAttribute.Class, "table table-bordered table-striped table-condensed");
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Table);
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Caption);
+                                        hw.WriteEncodedText(String.Format("Foreign Keys in {0}", table.TableName));
+                                        hw.RenderEndTag(); //caption
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Thead);
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("Foreign Key Name");
+                                        hw.RenderEndTag(); //th
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("References Table");
+                                        hw.RenderEndTag(); //th
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("Description");
+                                        hw.RenderEndTag(); //th
+
+                                        hw.RenderEndTag(); //thead
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Tbody);
+
+                                        for (int f = 0; f < table.ForeignKeys.Count; f++)
+                                        {
+                                            var fk = table.ForeignKeys[f];
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Tr);
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(fk.ForeignKeyName);
+                                            hw.RenderEndTag(); //td
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(String.Format("{0}.{1}", fk.ReferencedObjectSchemaName, fk.ReferencedObjectName));
+                                            hw.RenderEndTag(); //td
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(fk.Description ?? String.Empty);
+                                            hw.RenderEndTag(); //td
+
+                                            hw.RenderEndTag(); //tr
+                                        }
+
+                                        hw.RenderEndTag(); //tbody
+
+                                        hw.RenderEndTag(); //table
+
+
+
+                                    } //end foreign keys
 
 								} //end for table loop
 

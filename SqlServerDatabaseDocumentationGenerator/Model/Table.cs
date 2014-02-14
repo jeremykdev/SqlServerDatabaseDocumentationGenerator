@@ -18,5 +18,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 		public IList<Column> Columns { get; set; }
 
 		public IList<Index> Indexes { get; set; }
+
+        public IList<ForeignKey> ForeignKeys { get; set; }
 	}
 }
