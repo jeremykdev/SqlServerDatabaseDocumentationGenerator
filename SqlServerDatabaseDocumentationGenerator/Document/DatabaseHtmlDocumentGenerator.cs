@@ -206,6 +206,31 @@ THE SOFTWARE.");
 
                             hw.RenderEndTag(); //tr
 
+
+                           
+                            hw.RenderBeginTag(HtmlTextWriterTag.Tr);
+
+                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                            hw.Write("Table functions");
+                            hw.RenderEndTag(); //td
+
+                            hw.AddAttribute(HtmlTextWriterAttribute.Class, "text-right");
+                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                            if (schema.TableFunctions != null)
+                            {
+                                hw.WriteEncodedText(schema.TableFunctions.Count.ToString());
+                            }
+                            else
+                            {
+                                hw.Write("0");
+                            }
+
+                            hw.RenderEndTag(); //td
+
+
+                            hw.RenderEndTag(); //tr
+
+
 							hw.RenderEndTag(); //tbody
 
 							hw.RenderEndTag(); //table
@@ -319,10 +344,7 @@ THE SOFTWARE.");
                                             {
                                                 hw.WriteEncodedText(col.MaximumLength.ToString());
                                             }
-                                            //else
-                                            //{
-                                            //    hw.Write("n/a");
-                                            //}
+                                           
                                         }
 
 
@@ -934,6 +956,181 @@ THE SOFTWARE.");
 
                             } //end scalar functions
 
+
+                            if (schema.TableFunctions != null && schema.TableFunctions.Count > 0)
+                            {
+                                for (int t = 0; t < schema.TableFunctions.Count; t++)
+                                {
+                                    var tFunc = schema.TableFunctions[t];
+
+                                    hw.RenderBeginTag(HtmlTextWriterTag.H3);
+                                    hw.WriteEncodedText(String.Format("{0}.{1} (table function)", schema.SchemaName, tFunc.FunctionName));
+                                    hw.RenderEndTag(); //h3
+
+                                    if (!String.IsNullOrWhiteSpace(tFunc.Description))
+                                    {
+                                        hw.RenderBeginTag(HtmlTextWriterTag.P);
+                                        hw.WriteEncodedText(tFunc.Description);
+                                        hw.RenderEndTag(); //p
+                                    }
+
+
+                                    if (tFunc.Parameters != null && tFunc.Parameters.Count > 0)
+                                    {
+                                        if (tFunc.Parameters != null && tFunc.Parameters.Count > 0)
+                                        {
+                                            hw.AddAttribute(HtmlTextWriterAttribute.Class, "table table-bordered table-striped table-condensed");
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Table);
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Caption);
+                                            hw.Write("Parameters");
+                                            hw.RenderEndTag();//caption
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Thead);
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Tr);
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                            hw.Write("Paramater Name");
+                                            hw.RenderEndTag(); //th
+
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                            hw.Write("System Data Type");
+                                            hw.RenderEndTag(); //th
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                            hw.Write("Size");
+                                            hw.RenderEndTag(); //th
+
+
+
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                            hw.Write("Description");
+                                            hw.RenderEndTag(); //th
+
+                                            hw.RenderEndTag(); //tr
+
+                                            hw.RenderEndTag(); //thead
+
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Tbody);
+
+                                            for (int m = 0; m < tFunc.Parameters.Count; m++)
+                                            {
+                                                var param = tFunc.Parameters[m];
+
+                                                hw.RenderBeginTag(HtmlTextWriterTag.Tr);
+
+
+                                                hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                                hw.WriteEncodedText(param.ParameterName);
+                                                hw.RenderEndTag(); //td
+
+                                                hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                                hw.WriteEncodedText(param.DataType);
+                                                hw.RenderEndTag(); //td
+
+
+                                                hw.AddAttribute(HtmlTextWriterAttribute.Class, "text-right");
+                                                hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                                //show precision, scale when appliable
+                                                if (param.Precision.HasValue && param.Scale.HasValue && param.Precision > 0)
+                                                {
+                                                    hw.WriteEncodedText(String.Format("{0},{1}", param.Precision.Value, param.Scale.Value));
+                                                }
+                                                else
+                                                {
+                                                    if (param.MaximumLength.HasValue && param.MaximumLength.Value != -1)
+                                                    {
+                                                        hw.WriteEncodedText(param.MaximumLength.ToString());
+                                                    }
+
+                                                }
+
+                                                hw.RenderEndTag(); //td
+
+                                                hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                                hw.WriteEncodedText(param.Description ?? String.Empty);
+                                                hw.RenderEndTag(); //td
+
+                                                hw.RenderEndTag(); //tr
+
+                                            } //end table func parameter loop
+
+
+                                            hw.RenderEndTag(); //tbody
+
+                                            hw.RenderEndTag(); //table
+
+
+
+                                        }
+
+                                    }//end table function parameter
+
+
+                                    if (tFunc.Columns != null && tFunc.Columns.Count > 0)
+                                    {
+
+                                        hw.AddAttribute(HtmlTextWriterAttribute.Class, "table table-bordered table-striped table-condensed schema-objects-list-container");
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Table);
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Thead);
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Tr);
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("Column Name");
+                                        hw.RenderEndTag(); //th
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("System Data Type");
+                                        hw.RenderEndTag(); //th
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("Allow Null");
+                                        hw.RenderEndTag(); //th
+
+                                        hw.RenderEndTag(); //tr
+
+                                        hw.RenderEndTag(); //thead
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Tbody);
+
+                                        for (int c = 0; c < tFunc.Columns.Count; c++)
+                                        {
+                                            var col = tFunc.Columns[c];
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Tr);
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(col.ColumnName);
+                                            hw.RenderEndTag(); //td
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(col.BaseDataTypeName);
+                                            hw.RenderEndTag(); //td
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(col.AllowNull.ToYesNo());
+                                            hw.RenderEndTag(); //td
+
+                                            hw.RenderEndTag(); //tr
+
+                                        } //end table function column loop
+
+                                        hw.RenderEndTag(); //tbody
+
+                                        hw.RenderEndTag(); //table
+
+                                    } //end table function columns
+
+
+                                }
+
+                            } //end table functions
 
 						}// end for schema loop
 
