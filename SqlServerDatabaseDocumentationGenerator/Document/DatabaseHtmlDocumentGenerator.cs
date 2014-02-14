@@ -77,8 +77,12 @@ THE SOFTWARE.");
 						{
 							var schema = db.Schemas[s];
 							bool hasTables = (schema.Tables != null && schema.Tables.Count > 0);
-							
 
+                            if (s > 0)
+                            {
+                                hw.RenderBeginTag(HtmlTextWriterTag.Hr);
+                                hw.RenderEndTag(); //hr
+                            }
 
 							hw.RenderBeginTag(HtmlTextWriterTag.H2);
 							hw.WriteEncodedText(String.Format("{0} (schema)", schema.SchemaName));
@@ -1212,6 +1216,7 @@ THE SOFTWARE.");
 				.no-default { font-style: italic; }
                 .return-type { font-weight: bold; }
                 .schema-objects-list-container { width: 40%; min-width: 200px }
+                th { background-color: #B0C4DE; }
 				";
 
 
