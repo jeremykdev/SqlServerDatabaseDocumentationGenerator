@@ -31,6 +31,11 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
                 result = this.queryForViewColumns(parent as View);
             }
 
+            if (parent is TableFunction)
+            {
+                result = this.queryForFunctionColumns(parent as TableFunction);
+            }
+
 			return result;
 		}
 
@@ -101,5 +106,30 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 
 			return this.peta.Fetch<Column>(sql);
 		}
+
+
+        private IList<Column> queryForFunctionColumns(TableFunction func)
+        {
+            var sql = new Sql(@"SELECT 
+	                            C.name AS ColumnName
+	                            , Y.[name] AS BaseDataTypeName
+	                            , C.is_nullable AS AllowNull
+
+                            FROM sys.objects AS T	
+	                            INNER JOIN sys.schemas AS S
+		                            ON ( T.schema_id = S.schema_id )
+	                            INNER JOIN sys.columns AS C
+		                            ON ( T.object_id = C.object_id )
+	                            INNER JOIN sys.types AS Y
+		                            ON ( Y.user_type_id  = C.user_type_id )
+
+                            WHERE T.object_id = @0
+	                            AND T.type = 'TF'
+
+                            ORDER BY C.column_id, C.name;", func.FunctionId);
+
+            return this.peta.Fetch<Column>(sql);
+
+        }
 	}
 }

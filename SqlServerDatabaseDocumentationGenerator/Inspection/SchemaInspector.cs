@@ -35,6 +35,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 
                 var scalarUdfInspector = new ScalarFunctionInspector(this.peta);
 
+                var tableUdfInspector = new TableFunctionInspector(this.peta);
+
 				Schema schema = null;
 
 				for (int i = 0; i < schemaList.Count; i++)
@@ -45,6 +47,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
                     schema.Views = viewInspector.GetViews(schema);
                     schema.StoredProcedures = sprocInspector.GetStoredProcedures(schema);
                     schema.ScalarFunctions = scalarUdfInspector.GetScalarFunctions(schema);
+                    schema.TableFunctions = tableUdfInspector.GetTableFunctions(schema);
 				}
 
 			}

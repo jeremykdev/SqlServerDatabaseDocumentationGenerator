@@ -30,18 +30,18 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
                 if (routine is IUserDefinedFunction)
                 {
 
-                    results = this.queryForScalarFunctionParameters(routine as IUserDefinedFunction);
+                    results = this.queryForUserDefinedFunctionParameters(routine as IUserDefinedFunction);
                 }
 
             }
 
-            //TODO: support functions
+         
 
 
             return results;
         }
 
-        private IList<Parameter> queryForScalarFunctionParameters(IUserDefinedFunction func)
+        private IList<Parameter> queryForUserDefinedFunctionParameters(IUserDefinedFunction func)
         {
             var sql = new Sql(@"SELECT 
 	                                PM.name AS ParameterName 
