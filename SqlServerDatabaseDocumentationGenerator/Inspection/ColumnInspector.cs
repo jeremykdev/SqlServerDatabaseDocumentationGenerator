@@ -40,8 +40,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 						, I.DATA_TYPE AS BaseDataTypeName
 						, I.CHARACTER_MAXIMUM_LENGTH AS MaximumLength
 						, C.is_nullable AS AllowNull
-						, CONVERT(INT, C.precision) AS Precision
-						, CONVERT(INT, C.scale) AS Scale
+						, CONVERT(INT, I.NUMERIC_PRECISION) AS Precision
+						, CONVERT(INT, I.NUMERIC_SCALE) AS Scale
 						, C.object_id AS ColumnId
 						, I.COLUMN_DEFAULT AS DefaultValue
 						, C.is_identity AS IsIdentity
@@ -76,8 +76,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 						, I.DATA_TYPE AS BaseDataTypeName
 						, I.CHARACTER_MAXIMUM_LENGTH AS MaximumLength
 						, C.is_nullable AS AllowNull
-						, CONVERT(INT, C.precision) AS Precision
-						, CONVERT(INT, C.scale) AS Scale
+						, CONVERT(INT, I.NUMERIC_PRECISION) AS Precision
+						, CONVERT(INT, I.NUMERIC_SCALE) AS Scale
 						, C.object_id AS ColumnId
 						, I.COLUMN_DEFAULT AS DefaultValue
 						, C.is_identity AS IsIdentity

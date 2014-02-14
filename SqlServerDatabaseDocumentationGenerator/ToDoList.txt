@@ -1,8 +1,10 @@
 ﻿To Do List
 
-* Support views
+* DONE: Support views
 
-* Support indexes - done on tables.
+*  DONE: Support indexes - done on tables.  - done on views.
+
+* Support foreign keys on tables
 
 * DONE: Re-factor ColumnInspector query to remove duplicate column records with different descriptions.  One description is probably related to the index, not the table column
 
@@ -12,7 +14,9 @@
 
 * In HTML documentation link data types to descriptions on MSDN or Technet
 
+* In HTML add internal links to navigate between objects
 
+* Support user defined functions: scalar and table
 
 * CSS Classes 
 	.empty-object

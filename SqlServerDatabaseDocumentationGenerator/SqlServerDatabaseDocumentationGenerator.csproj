@@ -49,6 +49,7 @@
     <Compile Include="Inspection\DatabaseInspector.cs" />
     <Compile Include="Inspection\IndexInspector.cs" />
     <Compile Include="Inspection\ParameterInspector.cs" />
+    <Compile Include="Inspection\ScalarFunctionInspector.cs" />
     <Compile Include="Inspection\SchemaInspector.cs" />
     <Compile Include="Inspection\StoredProcedureInspector.cs" />
     <Compile Include="Inspection\TableInspector.cs" />
@@ -58,7 +59,9 @@
     <Compile Include="Model\IDbObject.cs" />
     <Compile Include="Model\IDbRoutine.cs" />
     <Compile Include="Model\Index.cs" />
+    <Compile Include="Model\IUserDefinedFunction.cs" />
     <Compile Include="Model\Parameter.cs" />
+    <Compile Include="Model\ScalarFunction.cs" />
     <Compile Include="Model\Schema.cs" />
     <Compile Include="Model\StoredProcedure.cs" />
     <Compile Include="Model\Table.cs" />

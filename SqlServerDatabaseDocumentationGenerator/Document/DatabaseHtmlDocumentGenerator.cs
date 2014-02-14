@@ -248,10 +248,10 @@ THE SOFTWARE.");
                                             {
                                                 hw.WriteEncodedText(col.MaximumLength.ToString());
                                             }
-                                            else
-                                            {
-                                                hw.Write("n/a");
-                                            }
+                                            //else
+                                            //{
+                                            //    hw.Write("n/a");
+                                            //}
                                         }
 
 
@@ -482,10 +482,10 @@ THE SOFTWARE.");
                                             {
                                                 hw.WriteEncodedText(col.MaximumLength.ToString());
                                             }
-                                            else
-                                            {
-                                                hw.Write("n/a");
-                                            }
+                                            //else
+                                            //{
+                                            //    hw.Write("n/a");
+                                            //}
                                         }
 
 
@@ -697,10 +697,10 @@ THE SOFTWARE.");
                                                 {
                                                     hw.WriteEncodedText(param.MaximumLength.ToString());
                                                 }
-                                                else
-                                                {
-                                                    hw.Write("n/a");
-                                                }
+                                                //else
+                                                //{
+                                                //    hw.Write("n/a");
+                                                //}
                                             }
 
                                           

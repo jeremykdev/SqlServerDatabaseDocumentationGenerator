@@ -19,6 +19,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 
         public IList<StoredProcedure> StoredProcedures { get; set; }
 
+        public IList<ScalarFunction> ScalarFunctions { get; set; }
+
 		public int ObjectId { get { return this.SchemaId; } }
 	}
 }
