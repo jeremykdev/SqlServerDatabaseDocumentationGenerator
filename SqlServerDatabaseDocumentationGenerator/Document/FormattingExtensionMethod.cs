@@ -19,6 +19,31 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Document
 			return "No";
 		}
 
+
+        /// <summary>
+        /// For a given foreign key get the column names as array of string
+        /// </summary>
+        /// <param name="fk"></param>
+        /// <returns></returns>
+        public static string[] GetForeignKeyParentColumnNames(this ForeignKey fk)
+        {
+          return (
+                from fkc in fk.ForeignKeyColumns
+                orderby fkc.ConstraintColumnId
+                select fkc.ParentColumnName
+                ).ToArray();
+
+        }
+
+        public static string[] GetForeignKeyReferenceColumnNames(this ForeignKey fk)
+        {
+            return (
+                from fkc in fk.ForeignKeyColumns
+                orderby fkc.ConstraintColumnId
+                select fkc.ReferenceColumnName
+                ).ToArray();
+        }
+
         /// <summary>
         /// Create reader friendly text for display of a functon return value
         /// </summary>

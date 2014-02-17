@@ -21,11 +21,43 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
         {
             IList<ForeignKey> fkList = this.queryForForeignKeys(table);
 
-
-
             //TODO: add columns
+            if (fkList != null && fkList.Count > 0)
+            {
+                for (int k = 0; k < fkList.Count; k++)
+                {
+                    var fk = fkList[k];
+
+                    fk.ForeignKeyColumns = this.queryForForeignKeyColumns(table, fk);
+                }
+
+            }
+
 
             return fkList;
+        }
+
+        private IList<ForeignKeyColumn> queryForForeignKeyColumns(Table table, ForeignKey fk)
+        {
+            var sql = new Sql(@"SELECT 
+	                                FKC.parent_column_id AS  ParentColumnId
+	                                , PC.[name] AS ParentColumnName
+	                                , FKC.referenced_column_id AS ReferenceColumnId
+	                                , RC.[name] AS ReferenceColumnName
+                                    , FKC.constraint_column_id AS ConstraintColumnId
+
+                                FROM sys.foreign_key_columns AS FKC
+	                                INNER JOIN sys.columns AS PC
+		                                ON ( FKC.parent_object_id = PC.object_id AND FKC.parent_column_id = PC.column_id )
+	                                INNER JOIN sys.columns AS RC
+		                                ON ( FKC.referenced_object_id = RC.object_id AND FKC.referenced_column_id = RC.column_id )
+
+                                WHERE FKC.parent_object_id = @0
+	                                AND FKC.constraint_object_id = @1
+	
+                                ORDER BY FKC.constraint_column_id;", table.TableId, fk.ForeignKeyId);
+
+            return this.peta.Fetch<ForeignKeyColumn>(sql);
         }
 
         private IList<ForeignKey> queryForForeignKeys(Table table)

@@ -488,7 +488,11 @@ THE SOFTWARE.");
                                         hw.RenderEndTag(); //th
 
                                         hw.RenderBeginTag(HtmlTextWriterTag.Th);
-                                        hw.Write("References Table");
+                                        hw.Write("Columns");
+                                        hw.RenderEndTag(); //th
+
+                                        hw.RenderBeginTag(HtmlTextWriterTag.Th);
+                                        hw.Write("References Table (Columns)");
                                         hw.RenderEndTag(); //th
 
                                         hw.RenderBeginTag(HtmlTextWriterTag.Th);
@@ -510,8 +514,14 @@ THE SOFTWARE.");
                                             hw.RenderEndTag(); //td
 
                                             hw.RenderBeginTag(HtmlTextWriterTag.Td);
-                                            hw.WriteEncodedText(String.Format("{0}.{1}", fk.ReferencedObjectSchemaName, fk.ReferencedObjectName));
+                                            hw.WriteEncodedText(String.Join(", ", fk.GetForeignKeyParentColumnNames()));
                                             hw.RenderEndTag(); //td
+
+                                            hw.RenderBeginTag(HtmlTextWriterTag.Td);
+                                            hw.WriteEncodedText(String.Format("{0}.{1} ({2})", fk.ReferencedObjectSchemaName, fk.ReferencedObjectName, String.Join(", ",fk.GetForeignKeyReferenceColumnNames())));
+                                            hw.RenderEndTag(); //td
+
+                                            
 
                                             hw.RenderBeginTag(HtmlTextWriterTag.Td);
                                             hw.WriteEncodedText(fk.Description ?? String.Empty);

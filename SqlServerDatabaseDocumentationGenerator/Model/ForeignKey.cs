@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+
 
 namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 {
@@ -29,6 +29,6 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 
         public int ObjectId { get { return this.ForeignKeyId; } }
 
-        //create new type for Column with Column name and ID to store for columns in table and referenced table
+        public IList<ForeignKeyColumn> ForeignKeyColumns { get; set; }
     }
 }

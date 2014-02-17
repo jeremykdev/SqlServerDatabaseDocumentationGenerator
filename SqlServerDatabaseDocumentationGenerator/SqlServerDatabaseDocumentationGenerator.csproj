@@ -59,6 +59,7 @@
     <Compile Include="Model\Column.cs" />
     <Compile Include="Model\Database.cs" />
     <Compile Include="Model\ForeignKey.cs" />
+    <Compile Include="Model\ForeignKeyColumn.cs" />
     <Compile Include="Model\IDbObject.cs" />
     <Compile Include="Model\IDbRoutine.cs" />
     <Compile Include="Model\Index.cs" />
