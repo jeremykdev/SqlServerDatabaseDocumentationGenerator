@@ -76,7 +76,6 @@
     <Compile Include="Utility\SqlConnectionTester.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="readme.txt" />
     <Content Include="third-party\bootstrap\bootstrap.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
