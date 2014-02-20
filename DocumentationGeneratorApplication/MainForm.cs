@@ -3,9 +3,11 @@ using System.Linq;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection;
 using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Document;
 using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility;
+using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model;
 
 namespace net.datacowboy.DocumentationGeneratorApplication
 {
@@ -26,6 +28,9 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 
 
 		}
+
+
+        
 
         private void clearErrorMessages()
         {
@@ -95,6 +100,20 @@ namespace net.datacowboy.DocumentationGeneratorApplication
         }
 
 
+
+
+        private static Task<Database> getDatabaseMetaDataAysnc(string connectionString)
+        {
+            return Task<Database>.Factory.StartNew(() =>
+            {
+                var dbi = new DatabaseInspector(connectionString);
+                return dbi.GetDatabaseMetaData();
+
+            });
+
+        }
+
+
 		private void btnGenerateDoc_Click(object sender, EventArgs e)
 		{
             if (!this.validateFormInput())
@@ -103,10 +122,14 @@ namespace net.datacowboy.DocumentationGeneratorApplication
             }
 
             this.btnGenerateDoc.Enabled = false;
-            
 
-			var dbi = new DatabaseInspector(this.txtConnectionString.Text);
-			var metadata = dbi.GetDatabaseMetaData();
+            Cursor.Current = Cursors.WaitCursor;
+            Application.DoEvents();
+
+            //perform database operations aysnc
+            var taskMeta = getDatabaseMetaDataAysnc(this.txtConnectionString.Text);
+
+            var metadata = taskMeta.Result;
 
 			DatabaseHtmlDocumentGenerator gen = new DatabaseHtmlDocumentGenerator();
 
@@ -116,6 +139,11 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 			{
 				var str = gen.ExportToHtml(metadata, sw);
 			}
+
+
+
+            Cursor.Current = Cursors.Default;
+            Application.DoEvents();
 
 			if (this.chkOpenDoc.Checked && File.Exists(docFilePath))
 			{
