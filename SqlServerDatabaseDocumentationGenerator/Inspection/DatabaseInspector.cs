@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model;
+using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility;
 
 namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 {
@@ -25,37 +26,13 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 			this.sqlConnection = new SqlConnection(this.sqlConnectionString);
 		}
 
-		private ConnectionTestResult testConnection(bool closeConnection=false)
-		{
-
-			var result = new ConnectionTestResult();
-
-			try
-			{
-				this.sqlConnection.Open();
-
-				if (closeConnection)
-				{
-					this.sqlConnection.Close();
-				}
-
-
-				result.Success = true;
-			}
-			catch (Exception ex)
-			{
-				result.Success = false;
-				result.ErrorMessage = ex.Message;
-			}
-
-			return result;
-		}
+		
 
 		public Database GetDatabaseMetaData()
 		{
 			var database = new Database();
 
-			if (this.testConnection(closeConnection:false).Success)
+            if (SqlConnectionTester.TestConnectionString(this.sqlConnectionString, false).Success)
 			{
 				this.peta = new PetaPoco.Database(this.sqlConnectionString, "System.Data.SqlClient");
 
@@ -66,11 +43,6 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 				var schemaInspector = new SchemaInspector(this.peta);
 
 				database.Schemas = schemaInspector.GetSchemas();
-
-
-				// TODO: populate schema
-
-				//TODO: populate tables & columns
 
 			}
 

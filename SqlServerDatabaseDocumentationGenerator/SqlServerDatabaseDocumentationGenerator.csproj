@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectionTestResult.cs" />
+    <Compile Include="Utility\ConnectionTestResult.cs" />
     <Compile Include="Document\DatabaseHtmlDocumentGenerator.cs" />
     <Compile Include="Document\FormattingExtensionMethod.cs" />
     <Compile Include="Inspection\ColumnInspector.cs" />
@@ -73,6 +73,7 @@
     <Compile Include="Model\View.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="third-party\PetaPoco.cs" />
+    <Compile Include="Utility\SqlConnectionTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="readme.txt" />
