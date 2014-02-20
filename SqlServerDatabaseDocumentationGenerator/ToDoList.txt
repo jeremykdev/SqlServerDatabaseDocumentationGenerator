@@ -4,7 +4,7 @@
 
 * DONE: Support indexes - done on tables.  - done on views.
 
-* Support foreign keys on tables
+* DONE: Support foreign keys on tables
 
 * DONE: Re-factor ColumnInspector query to remove duplicate column records with different descriptions.  One description is probably related to the index, not the table column
 

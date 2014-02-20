@@ -1,6 +1,3 @@
-﻿This project will allow you to create human readable documentation for a Microsoft SQL Server database (versions 2005+).  This includes schemas, tables, views, columns, functions, and stored procedures.  Descriptions created as extended properties with a name 'MS_Description' such as those created when 
-
-
 This project is release under the MIT license.
 
 The MIT License (MIT)
