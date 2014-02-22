@@ -1,5 +1,11 @@
 ﻿To Do List
 
+* In HTML documentation link data types to descriptions on MSDN or Technet
+
+* In HTML add internal links to navigate between objects
+
+* DONE: Support user defined functions: scalar and table
+
 * DONE: Support views
 
 * DONE: Support indexes - done on tables.  - done on views.
@@ -10,9 +16,6 @@
 
 * DONE: In DatabaseHtmlDocumentGenerator replace Write() with WriteEncodedText() to escape reserved entities.
 
-* In HTML documentation link data types to descriptions on MSDN or Technet
 
-* In HTML add internal links to navigate between objects
 
-* DONE: Support user defined functions: scalar and table
 
