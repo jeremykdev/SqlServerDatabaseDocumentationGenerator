@@ -1227,6 +1227,7 @@ THE SOFTWARE.");
                 .return-type { font-weight: bold; }
                 .schema-objects-list-container { width: 40%; min-width: 200px }
                 th { background-color: #B0C4DE; }
+                body {margin-left: .5em;}
 				";
 
 
