@@ -1,5 +1,9 @@
 ﻿To Do List
 
+* In WinForm UI: Increase width of connection string textbox control
+
+* In WinForm UI: Add connection string wizard
+
 * In HTML documentation link data types to descriptions on MSDN or Technet
 
 * In HTML add internal links to navigate between objects
