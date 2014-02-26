@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Reflection;
 using System.IO;
 using System.Web.UI;
 using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model;
@@ -10,8 +10,10 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Document
 {
 	public class DatabaseHtmlDocumentGenerator
 	{
-			
+            //http://stackoverflow.com/questions/1559791/how-do-i-find-assembly-version-of-calling-program
+            private readonly string appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
 
+            private readonly string projectUrl = "http://jeremykdev.github.io/SqlServerDatabaseDocumentationGenerator/";
 			
 			public string ExportToHtml(Database db, TextWriter textWriter)
 			{
@@ -1206,7 +1208,20 @@ THE SOFTWARE.");
 					}
 
 
-					
+					//footer
+                    hw.RenderBeginTag(HtmlTextWriterTag.P);
+                    hw.WriteEncodedText(String.Format("Documentation created using SQL Server Database Documentation Generator version {0}", this.appVersion));
+
+                    hw.WriteBreak(); //br
+
+                    hw.AddAttribute(HtmlTextWriterAttribute.Href, this.projectUrl);
+                    hw.RenderBeginTag(HtmlTextWriterTag.A);
+                    hw.WriteEncodedText(this.projectUrl);
+                    hw.RenderEndTag(); //a
+
+                    hw.RenderEndTag(); //p
+
+
 
 					hw.RenderEndTag(); //body
 
@@ -1229,6 +1244,7 @@ THE SOFTWARE.");
                 th { background-color: #B0C4DE; }
                 body {margin-left: .5em;}
 				";
+            
 
 
 	}
