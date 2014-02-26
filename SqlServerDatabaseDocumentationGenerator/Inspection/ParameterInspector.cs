@@ -7,13 +7,12 @@ using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model;
 
 namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 {
-    public class ParameterInspector
+    public class ParameterInspector: CommonInspector
     {
-         private PetaPoco.Database peta;
 
-        public ParameterInspector(PetaPoco.Database petaDb)
+        public ParameterInspector(PetaPoco.Database petaDb) : base(petaDb)
 		{
-			this.peta = petaDb;
+		
 		}
 
         public IList<Parameter> GetParameters(IDbRoutine routine)

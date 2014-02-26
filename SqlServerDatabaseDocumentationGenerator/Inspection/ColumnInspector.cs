@@ -7,13 +7,13 @@ using PetaPoco;
 
 namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 {
-	public class ColumnInspector
+	public class ColumnInspector: CommonInspector
 	{
-		private PetaPoco.Database peta;
 
-		public ColumnInspector(PetaPoco.Database petaDb)
+
+        public ColumnInspector(PetaPoco.Database petaDb): base(petaDb)
 		{
-			this.peta = petaDb;
+			
 		}
 
 

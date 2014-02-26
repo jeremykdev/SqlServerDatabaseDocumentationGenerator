@@ -7,14 +7,12 @@ using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model;
 
 namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 {
-    public class ViewInspector
+    public class ViewInspector : CommonInspector
     {
 
-        private PetaPoco.Database peta;
-
-        public ViewInspector(PetaPoco.Database petaDb)
+        public ViewInspector(PetaPoco.Database petaDb):base(petaDb)
         {
-            this.peta = petaDb;
+          
         }
 
         public IList<View> GetViews(Schema schema)

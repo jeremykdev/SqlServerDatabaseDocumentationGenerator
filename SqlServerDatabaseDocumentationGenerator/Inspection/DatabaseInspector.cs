@@ -8,17 +8,14 @@ using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility;
 
 namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 {
-	public class DatabaseInspector
+	public class DatabaseInspector : CommonInspector
 	{
 
 		private SqlConnection sqlConnection;
 
 		private string sqlConnectionString; 
 
-		private PetaPoco.Database peta;
-
-		
-
+	
 		public DatabaseInspector(string connstring)
 		{
 			

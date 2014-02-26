@@ -7,14 +7,12 @@ using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model;
 
 namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 {
-    public class ScalarFunctionInspector
+    public class ScalarFunctionInspector : CommonInspector
     {
 
-        private PetaPoco.Database peta;
-
-        public ScalarFunctionInspector(PetaPoco.Database petaDb) 		
+        public ScalarFunctionInspector(PetaPoco.Database petaDb) : base(petaDb)
         {
-	        this.peta = petaDb;
+
         }
 
         public IList<ScalarFunction> GetScalarFunctions(Schema schema)

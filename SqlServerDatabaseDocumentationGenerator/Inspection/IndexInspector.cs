@@ -7,13 +7,13 @@ using PetaPoco;
 
 namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 {
-	public class IndexInspector
+	public class IndexInspector : CommonInspector
 	{
-		private PetaPoco.Database peta;
+		
 
-		public IndexInspector(PetaPoco.Database petaDb)
+		public IndexInspector(PetaPoco.Database petaDb):base(petaDb)
 		{
-			this.peta = petaDb;
+			
 		}
 
 		public IList<Index> GetIndexes(IDbObject parent)

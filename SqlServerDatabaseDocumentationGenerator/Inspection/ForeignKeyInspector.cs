@@ -7,14 +7,12 @@ using PetaPoco;
 
 namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 {
-    public class ForeignKeyInspector
+    public class ForeignKeyInspector : CommonInspector
     {
-        private PetaPoco.Database peta;
-
-        public ForeignKeyInspector(PetaPoco.Database petaDb)
+        
+        public ForeignKeyInspector(PetaPoco.Database petaDb):base(petaDb)
 		{
-			this.peta = petaDb;		
-		
+			
 		}
 
         public IList<ForeignKey> GetForeignKeys(Table table)

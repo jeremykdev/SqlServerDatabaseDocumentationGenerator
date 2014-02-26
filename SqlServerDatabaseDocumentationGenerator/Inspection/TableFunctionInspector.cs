@@ -7,13 +7,13 @@ using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model;
 
 namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 {
-    class TableFunctionInspector
+    class TableFunctionInspector : CommonInspector
     {
-        private PetaPoco.Database peta;
+      
 
-        public TableFunctionInspector(PetaPoco.Database petaDb) 		
+        public TableFunctionInspector(PetaPoco.Database petaDb):base(petaDb)	
         {
-	        this.peta = petaDb;
+	      
         }
 
 

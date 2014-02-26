@@ -7,14 +7,12 @@ using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model;
 
 namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 {
-    public class StoredProcedureInspector
+    public class StoredProcedureInspector : CommonInspector
     {
 
-        private PetaPoco.Database peta;
-
-        public StoredProcedureInspector(PetaPoco.Database petaDb)
+        public StoredProcedureInspector(PetaPoco.Database petaDb):base(petaDb)
 		{
-			this.peta = petaDb;
+			 
 		}
 
         public IList<StoredProcedure> GetStoredProcedures(Schema schema)

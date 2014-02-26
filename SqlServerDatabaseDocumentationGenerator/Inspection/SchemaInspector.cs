@@ -7,15 +7,11 @@ using PetaPoco;
 
 namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 {
-	public class SchemaInspector
+	public class SchemaInspector : CommonInspector
 	{
-		private PetaPoco.Database peta;
 
-		
-
-		public SchemaInspector(PetaPoco.Database petaDb)
+        public SchemaInspector(PetaPoco.Database petaDb) : base(petaDb)
 		{
-			this.peta = petaDb;
 		}
 
 
