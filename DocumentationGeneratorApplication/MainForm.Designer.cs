@@ -36,6 +36,7 @@
             this.btnGenerateDoc = new System.Windows.Forms.Button();
             this.chkOpenDoc = new System.Windows.Forms.CheckBox();
             this.errorProviderMainForm = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnDocFileBrowse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderMainForm)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,7 +53,7 @@
             // 
             this.txtConnectionString.Location = new System.Drawing.Point(12, 29);
             this.txtConnectionString.Name = "txtConnectionString";
-            this.txtConnectionString.Size = new System.Drawing.Size(399, 20);
+            this.txtConnectionString.Size = new System.Drawing.Size(471, 20);
             this.txtConnectionString.TabIndex = 1;
             // 
             // lblDocFile
@@ -97,11 +98,22 @@
             // 
             this.errorProviderMainForm.ContainerControl = this;
             // 
+            // btnDocFileBrowse
+            // 
+            this.btnDocFileBrowse.Location = new System.Drawing.Point(409, 87);
+            this.btnDocFileBrowse.Name = "btnDocFileBrowse";
+            this.btnDocFileBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btnDocFileBrowse.TabIndex = 6;
+            this.btnDocFileBrowse.Text = "Browse...";
+            this.btnDocFileBrowse.UseVisualStyleBackColor = true;
+            this.btnDocFileBrowse.Click += new System.EventHandler(this.btnDocFileBrowse_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(495, 198);
+            this.Controls.Add(this.btnDocFileBrowse);
             this.Controls.Add(this.chkOpenDoc);
             this.Controls.Add(this.btnGenerateDoc);
             this.Controls.Add(this.txtDocFile);
@@ -126,6 +138,7 @@
 		private System.Windows.Forms.Button btnGenerateDoc;
 		private System.Windows.Forms.CheckBox chkOpenDoc;
         private System.Windows.Forms.ErrorProvider errorProviderMainForm;
+        private System.Windows.Forms.Button btnDocFileBrowse;
 	}
 }
 

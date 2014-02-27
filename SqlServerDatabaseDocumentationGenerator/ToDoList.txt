@@ -1,6 +1,6 @@
 ﻿To Do List
 
-* In WinForm UI: Increase width of connection string textbox control
+
 
 * In WinForm UI: Add connection string wizard
 
@@ -20,6 +20,6 @@
 
 * DONE: In DatabaseHtmlDocumentGenerator replace Write() with WriteEncodedText() to escape reserved entities.
 
-
+* DONE: In WinForm UI: Increase width of connection string textbox control 
 
 

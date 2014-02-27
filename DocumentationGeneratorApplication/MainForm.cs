@@ -150,7 +150,21 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 				Process.Start(docFilePath);
 			}
 
-            this.btnGenerateDoc.Enabled = true;
+            this.btnGenerateDoc.Enabled = true; 
 		}
+
+        private void btnDocFileBrowse_Click(object sender, EventArgs e)
+        {
+            var dialog = new SaveFileDialog();
+            dialog.AddExtension = true;
+            dialog.DefaultExt = "html";
+            dialog.ValidateNames = true;
+            dialog.Filter = "HTML Files (*.htm;*.html)|*.htm;*.html";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                this.txtDocFile.Text = dialog.FileName;
+            }
+        }
 	}
 }
