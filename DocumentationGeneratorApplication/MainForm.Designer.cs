@@ -37,6 +37,7 @@
             this.chkOpenDoc = new System.Windows.Forms.CheckBox();
             this.errorProviderMainForm = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnDocFileBrowse = new System.Windows.Forms.Button();
+            this.btnEditConnection = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderMainForm)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,7 +78,7 @@
             this.btnGenerateDoc.Location = new System.Drawing.Point(16, 149);
             this.btnGenerateDoc.Name = "btnGenerateDoc";
             this.btnGenerateDoc.Size = new System.Drawing.Size(150, 23);
-            this.btnGenerateDoc.TabIndex = 4;
+            this.btnGenerateDoc.TabIndex = 6;
             this.btnGenerateDoc.Text = "Generate Documentation";
             this.btnGenerateDoc.UseVisualStyleBackColor = true;
             this.btnGenerateDoc.Click += new System.EventHandler(this.btnGenerateDoc_Click);
@@ -103,16 +104,27 @@
             this.btnDocFileBrowse.Location = new System.Drawing.Point(409, 87);
             this.btnDocFileBrowse.Name = "btnDocFileBrowse";
             this.btnDocFileBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btnDocFileBrowse.TabIndex = 6;
+            this.btnDocFileBrowse.TabIndex = 4;
             this.btnDocFileBrowse.Text = "Browse...";
             this.btnDocFileBrowse.UseVisualStyleBackColor = true;
             this.btnDocFileBrowse.Click += new System.EventHandler(this.btnDocFileBrowse_Click);
+            // 
+            // btnEditConnection
+            // 
+            this.btnEditConnection.Location = new System.Drawing.Point(489, 26);
+            this.btnEditConnection.Name = "btnEditConnection";
+            this.btnEditConnection.Size = new System.Drawing.Size(75, 23);
+            this.btnEditConnection.TabIndex = 2;
+            this.btnEditConnection.Text = "Edit...";
+            this.btnEditConnection.UseVisualStyleBackColor = true;
+            this.btnEditConnection.Click += new System.EventHandler(this.btnEditConnection_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 198);
+            this.ClientSize = new System.Drawing.Size(574, 198);
+            this.Controls.Add(this.btnEditConnection);
             this.Controls.Add(this.btnDocFileBrowse);
             this.Controls.Add(this.chkOpenDoc);
             this.Controls.Add(this.btnGenerateDoc);
@@ -139,6 +151,7 @@
 		private System.Windows.Forms.CheckBox chkOpenDoc;
         private System.Windows.Forms.ErrorProvider errorProviderMainForm;
         private System.Windows.Forms.Button btnDocFileBrowse;
+        private System.Windows.Forms.Button btnEditConnection;
 	}
 }
 

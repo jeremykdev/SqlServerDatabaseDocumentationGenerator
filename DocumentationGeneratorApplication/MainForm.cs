@@ -166,5 +166,25 @@ namespace net.datacowboy.DocumentationGeneratorApplication
                 this.txtDocFile.Text = dialog.FileName;
             }
         }
+
+        private void btnEditConnection_Click(object sender, EventArgs e)
+        {
+            this.showConnectionStringDialog();
+        }
+
+        private void showConnectionStringDialog()
+        {
+            var frmConnEditDialog = new FrmConnectionString(this.txtConnectionString.Text.Trim());
+
+            frmConnEditDialog.ShowDialog();
+
+            if (frmConnEditDialog.Result == System.Windows.Forms.DialogResult.OK)
+            {
+                this.txtConnectionString.Text = frmConnEditDialog.GetConnectionString();
+            }
+
+
+
+        }
 	}
 }
