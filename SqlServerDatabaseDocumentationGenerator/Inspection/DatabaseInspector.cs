@@ -27,15 +27,14 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 
 		public Database GetDatabaseMetaData()
 		{
-			var database = new Database();
+            Database database = null;
 
             if (SqlConnectionTester.TestConnectionString(this.sqlConnectionString, false).Success)
 			{
 				this.peta = new PetaPoco.Database(this.sqlConnectionString, "System.Data.SqlClient");
 
-				
-				database.DatabaseName = this.getDatabaseName();
-				database.ObjectId = this.getDatabaseId();
+
+                database = this.queryForDatabase();
 
 				var schemaInspector = new SchemaInspector(this.peta);
 
@@ -46,6 +45,20 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 			return database;
 		}
 
+        private Database queryForDatabase()
+        {
+            var sql = new PetaPoco.Sql(@"SELECT DatabaseName
+	                                        ,  ObjectId
+	                                        , EP.value AS [Description]
+                                        FROM 
+	                                        ( SELECT DB_NAME() AS DatabaseName, DB_ID() AS ObjectId ) AS DbInfo
+	                                        LEFT OUTER JOIN sys.extended_properties AS EP
+		                                        ON ( EP.class = 0 AND EP.[name] = 'MS_Description' );");
+
+            return this.peta.FirstOrDefault<Database>(sql);
+        }
+
+        /*
 		/// <summary>
 		/// Lookup name of current database
 		/// </summary>
@@ -64,7 +77,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 		}
 
 
-		
+		*/
 
 	}
 }

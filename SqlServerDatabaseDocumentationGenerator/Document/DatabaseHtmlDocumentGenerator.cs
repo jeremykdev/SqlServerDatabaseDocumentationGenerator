@@ -72,6 +72,13 @@ THE SOFTWARE.");
 
 					hw.RenderEndTag(); //h1
 
+                    if (!String.IsNullOrWhiteSpace(db.Description))
+                    {
+                        hw.RenderBeginTag(HtmlTextWriterTag.P);
+                        hw.WriteEncodedText(db.Description);
+                        hw.RenderEndTag(); //p
+                    }
+
 					if (db.Schemas != null && db.Schemas.Count > 0)
 					{
 

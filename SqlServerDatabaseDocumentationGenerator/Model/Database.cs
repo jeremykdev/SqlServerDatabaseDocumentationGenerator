@@ -14,5 +14,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 
 		public IList<Schema> Schemas { get; set; }
 
+        public string Description { get; set; }
+
 	}
 }
