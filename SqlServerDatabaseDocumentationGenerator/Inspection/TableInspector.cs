@@ -39,6 +39,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 					table.Columns = columnInspector.GetColumns(table);
 					table.Indexes = indexInspector.GetIndexes(table);
                     table.ForeignKeys = foreignKeyInspector.GetForeignKeys(table);
+                    table.Parent = schema;
 				}
 
 			}

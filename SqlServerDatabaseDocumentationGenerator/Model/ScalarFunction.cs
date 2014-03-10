@@ -25,5 +25,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
         public int? ReturnTypePrecision { get; set; }
 
         public int? ReturnTypeScale { get; set; }
+
+        public IDbObject Parent { get; set; }
     }
 }

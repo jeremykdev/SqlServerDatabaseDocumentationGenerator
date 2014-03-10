@@ -22,5 +22,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 		public bool IsUnique { get; set; }
 
 		public string IndexTypeDescription { get; set; }
+
+        public IDbObject Parent { get; set; }
 	}
 }

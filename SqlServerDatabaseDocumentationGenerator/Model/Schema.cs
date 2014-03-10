@@ -24,5 +24,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
         public IList<TableFunction> TableFunctions { get; set; }
 
 		public int ObjectId { get { return this.SchemaId; } }
+
+        public IDbObject Parent { get; set; }
 	}
 }

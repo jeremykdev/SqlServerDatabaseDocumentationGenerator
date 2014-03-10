@@ -16,6 +16,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
         public string Description { get; set; }
 
         public IList<Parameter> Parameters { get; set; }
+
+        public IDbObject Parent { get; set; }
         
     }
 }

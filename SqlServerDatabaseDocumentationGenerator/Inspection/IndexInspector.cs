@@ -28,6 +28,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
                 for (int i = 0; i < indexList.Count; i++)
                 {
                     indexList[i].ColumnNames = this.getIndexColumnNames(indexList[i], parent);
+                    indexList[i].Parent = parent;
                 }
 
             }

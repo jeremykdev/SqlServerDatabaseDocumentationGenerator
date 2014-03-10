@@ -6,7 +6,7 @@ using System.Text;
 
 namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 {
-    public class Parameter
+    public class Parameter : IDbObject
     {
         public string ParameterName { get; set; }
 
@@ -21,5 +21,10 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
         public string Direction { get; set; }
 
         public string Description { get; set; }
+
+        public IDbObject Parent { get; set; }
+
+        public int ObjectId { get; set; }
+
     }
 }

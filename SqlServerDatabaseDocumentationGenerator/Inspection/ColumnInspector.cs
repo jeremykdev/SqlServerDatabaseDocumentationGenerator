@@ -36,6 +36,14 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
                 result = this.queryForFunctionColumns(parent as TableFunction);
             }
 
+            if (result != null && result.Count > 0)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    result[i].Parent = parent;
+                }
+            }
+
 			return result;
 		}
 

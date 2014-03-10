@@ -20,10 +20,9 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
             IList<ScalarFunction> functionList = null;
 
 
-            //TODO: get functions
             functionList = this.queryForScalarFunctions(schema);
 
-            //TODO: get parameters
+           
             if (functionList != null && functionList.Count > 0)
             {
                 var paramInspector = new ParameterInspector(this.peta);
@@ -32,6 +31,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
                 {
                     var sf = functionList[f];
                     sf.Parameters = paramInspector.GetParameters(sf);
+                    sf.Parent = schema;
                 }
 
             }

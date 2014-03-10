@@ -37,6 +37,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
                     func.Parameters = paramInspector.GetParameters(func);
 
                     func.Columns = columnInspector.GetColumns(func);
+
+                    func.Parent = schema;
                 }
                 
             }

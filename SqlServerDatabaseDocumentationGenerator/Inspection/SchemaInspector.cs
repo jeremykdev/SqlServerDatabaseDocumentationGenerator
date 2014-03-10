@@ -15,7 +15,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 		}
 
 
-		public IList<Schema> GetSchemas()
+		public IList<Schema> GetSchemas(net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model.Database parent)
 		{
 			//get schemas
 			List<Schema> schemaList = this.queryForSchemas();
@@ -44,6 +44,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
                     schema.StoredProcedures = sprocInspector.GetStoredProcedures(schema);
                     schema.ScalarFunctions = scalarUdfInspector.GetScalarFunctions(schema);
                     schema.TableFunctions = tableUdfInspector.GetTableFunctions(schema);
+
+                    schema.Parent = parent;
 				}
 
 			}

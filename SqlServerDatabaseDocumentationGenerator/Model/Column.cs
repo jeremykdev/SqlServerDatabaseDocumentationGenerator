@@ -36,5 +36,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 
 		public bool IsComputed { get; set; }
 
+        public IDbObject Parent { get; set; }
+
 	}
 }

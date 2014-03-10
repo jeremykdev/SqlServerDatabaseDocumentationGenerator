@@ -29,6 +29,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
                 {
                     var proc = spList[p];
                     proc.Parameters = parameterInspector.GetParameters(proc);
+                    proc.Parent = schema;
                 }
             }
 

@@ -38,7 +38,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 
 				var schemaInspector = new SchemaInspector(this.peta);
 
-				database.Schemas = schemaInspector.GetSchemas();
+				database.Schemas = schemaInspector.GetSchemas(database);
+
 
 			}
 

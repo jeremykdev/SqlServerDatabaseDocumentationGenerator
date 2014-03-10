@@ -34,8 +34,14 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 
             }
 
-         
 
+            if (results != null && results.Count > 0 && routine is IDbObject)
+            {
+                for (int i = 0; i < results.Count; i++)
+                {
+                    results[i].Parent = routine as IDbObject;
+                }
+            }
 
             return results;
         }

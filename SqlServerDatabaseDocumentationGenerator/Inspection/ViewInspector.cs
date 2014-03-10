@@ -35,6 +35,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 
                     view.Indexes = indexInspector.GetIndexes(view);
 
+                    view.Parent = schema;
+
                 }
 
             }

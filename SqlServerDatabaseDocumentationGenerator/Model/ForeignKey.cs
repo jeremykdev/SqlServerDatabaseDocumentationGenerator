@@ -30,5 +30,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
         public int ObjectId { get { return this.ForeignKeyId; } }
 
         public IList<ForeignKeyColumn> ForeignKeyColumns { get; set; }
+
+        public IDbObject Parent { get; set; }
     }
 }

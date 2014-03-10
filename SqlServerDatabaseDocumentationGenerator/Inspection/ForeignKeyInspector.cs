@@ -19,7 +19,6 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
         {
             IList<ForeignKey> fkList = this.queryForForeignKeys(table);
 
-            //TODO: add columns
             if (fkList != null && fkList.Count > 0)
             {
                 for (int k = 0; k < fkList.Count; k++)
@@ -27,8 +26,10 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
                     var fk = fkList[k];
 
                     fk.ForeignKeyColumns = this.queryForForeignKeyColumns(table, fk);
+                    fk.Parent = table;
                 }
 
+                
             }
 
 
