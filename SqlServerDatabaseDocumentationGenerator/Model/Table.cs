@@ -22,5 +22,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
         public IList<ForeignKey> ForeignKeys { get; set; }
 
         public IDbObject Parent { get; set; }
+
+        public string ObjectName { get { return this.TableName; } }
 	}
 }

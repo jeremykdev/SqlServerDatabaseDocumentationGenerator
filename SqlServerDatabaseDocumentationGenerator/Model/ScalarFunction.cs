@@ -27,5 +27,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
         public int? ReturnTypeScale { get; set; }
 
         public IDbObject Parent { get; set; }
+
+        public string ObjectName { get { return this.FunctionName; } }
     }
 }

@@ -7,7 +7,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 {
 	public class View :IDbObject
 	{
-
+        public string ObjectName { get { return this.ViewName; } }
 
 		public int ViewId { get; set; }
 

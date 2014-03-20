@@ -7,6 +7,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 {
     public class ForeignKey : IDbObject
     {
+        public string ObjectName { get { return this.ForeignKeyName; } }
+
         public int  ForeignKeyId { get; set; }
 
         public string ForeignKeyName { get; set; }

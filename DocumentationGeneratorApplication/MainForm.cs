@@ -37,7 +37,12 @@ namespace net.datacowboy.DocumentationGeneratorApplication
             this.errorProviderMainForm.Clear();
         }
 
-        private bool validateFormInput()
+        /// <summary>
+        /// Form input validation
+        /// </summary>
+        /// <param name="requireDocumentationFile">Is documentation file required, applies when generating document</param>
+        /// <returns></returns>
+        private bool validateFormInput(bool requireDocumentationFile=true)
         {
 
             bool errorFound = false;
@@ -62,7 +67,7 @@ namespace net.datacowboy.DocumentationGeneratorApplication
             }
 
             //has an ouptut filename with optional path been provided?
-            if (String.IsNullOrWhiteSpace(this.txtDocFile.Text))
+            if (requireDocumentationFile && String.IsNullOrWhiteSpace(this.txtDocFile.Text))
             {
                 errorFound = true;
                 this.errorProviderMainForm.SetError(this.txtDocFile, "Please enter a filename for the documentation file to be created");
@@ -116,14 +121,14 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 
 		private void btnGenerateDoc_Click(object sender, EventArgs e)
 		{
-            if (!this.validateFormInput())
+            if (!this.validateFormInput(true))
             {
                 return;
             }
 
-            this.btnGenerateDoc.Enabled = false;
+            this.lockUi();
 
-            Cursor.Current = Cursors.WaitCursor;
+            this.Cursor = Cursors.WaitCursor;
             Application.DoEvents();
 
             //perform database operations aysnc
@@ -142,7 +147,7 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 
 
 
-            Cursor.Current = Cursors.Default;
+            this.Cursor = Cursors.Default;
             Application.DoEvents();
 
 			if (this.chkOpenDoc.Checked && File.Exists(docFilePath))
@@ -150,7 +155,7 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 				Process.Start(docFilePath);
 			}
 
-            this.btnGenerateDoc.Enabled = true; 
+            this.unLockUi();
 		}
 
         private void btnDocFileBrowse_Click(object sender, EventArgs e)
@@ -186,5 +191,73 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 
 
         }
+
+        private void btnFindObjectsWithoutDescription_Click(object sender, EventArgs e)
+        {
+            if (!this.validateFormInput(false))
+            {
+                return;
+            }
+
+            this.lockUi();
+
+            this.Cursor = Cursors.WaitCursor;
+
+            Application.DoEvents();
+
+            //perform database operations aysnc
+            var taskMeta = getDatabaseMetaDataAysnc(this.txtConnectionString.Text);
+
+            var metadata = taskMeta.Result;
+
+            
+
+
+
+            this.Cursor = Cursors.Default;
+            Application.DoEvents();
+
+            this.showObjectsWithoutDescriptionDialog(metadata);
+
+            this.unLockUi();
+        }
+
+        private void showObjectsWithoutDescriptionDialog(Database dbMetadata)
+        {
+            var dialogForm = new FrmObjectsWithoutDescription(dbMetadata);
+            dialogForm.ShowDialog();
+        }
+
+        /// <summary>
+        /// Lock UI controls 
+        /// </summary>
+        /// <remarks>Call before call long running logic</remarks>
+        private void lockUi()
+        {
+            this.txtConnectionString.Enabled = false;
+            this.txtDocFile.Enabled = false;
+            this.btnDocFileBrowse.Enabled = false;
+            this.btnEditConnection.Enabled = false;
+            this.btnGenerateDoc.Enabled = false;
+            this.btnFindObjectsWithoutDescription.Enabled = false;
+            this.chkOpenDoc.Enabled = false;
+        }
+
+
+        /// <summary>
+        /// Unlock UI controls
+        /// </summary>
+        /// <remarks>Call when locking UI no longer needed</remarks>
+        private void unLockUi()
+        {
+            this.txtConnectionString.Enabled = true;
+            this.txtDocFile.Enabled = true;
+            this.btnDocFileBrowse.Enabled = true;
+            this.btnEditConnection.Enabled = true;
+            this.btnGenerateDoc.Enabled = true;
+            this.btnFindObjectsWithoutDescription.Enabled = true;
+            this.chkOpenDoc.Enabled = true;
+        }
+
 	}
 }

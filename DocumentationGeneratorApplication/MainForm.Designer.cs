@@ -38,6 +38,8 @@
             this.errorProviderMainForm = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnDocFileBrowse = new System.Windows.Forms.Button();
             this.btnEditConnection = new System.Windows.Forms.Button();
+            this.btnFindObjectsWithoutDescription = new System.Windows.Forms.Button();
+            this.ttMain = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderMainForm)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,6 +82,7 @@
             this.btnGenerateDoc.Size = new System.Drawing.Size(150, 23);
             this.btnGenerateDoc.TabIndex = 6;
             this.btnGenerateDoc.Text = "Generate Documentation";
+            this.ttMain.SetToolTip(this.btnGenerateDoc, "Generate documentation file");
             this.btnGenerateDoc.UseVisualStyleBackColor = true;
             this.btnGenerateDoc.Click += new System.EventHandler(this.btnGenerateDoc_Click);
             // 
@@ -106,6 +109,7 @@
             this.btnDocFileBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnDocFileBrowse.TabIndex = 4;
             this.btnDocFileBrowse.Text = "Browse...";
+            this.ttMain.SetToolTip(this.btnDocFileBrowse, "Browse for documentation file location");
             this.btnDocFileBrowse.UseVisualStyleBackColor = true;
             this.btnDocFileBrowse.Click += new System.EventHandler(this.btnDocFileBrowse_Click);
             // 
@@ -116,14 +120,27 @@
             this.btnEditConnection.Size = new System.Drawing.Size(75, 23);
             this.btnEditConnection.TabIndex = 2;
             this.btnEditConnection.Text = "Edit...";
+            this.ttMain.SetToolTip(this.btnEditConnection, "Edit connection string");
             this.btnEditConnection.UseVisualStyleBackColor = true;
             this.btnEditConnection.Click += new System.EventHandler(this.btnEditConnection_Click);
+            // 
+            // btnFindObjectsWithoutDescription
+            // 
+            this.btnFindObjectsWithoutDescription.Location = new System.Drawing.Point(191, 149);
+            this.btnFindObjectsWithoutDescription.Name = "btnFindObjectsWithoutDescription";
+            this.btnFindObjectsWithoutDescription.Size = new System.Drawing.Size(192, 23);
+            this.btnFindObjectsWithoutDescription.TabIndex = 7;
+            this.btnFindObjectsWithoutDescription.Text = "Find Objects Without a Description";
+            this.ttMain.SetToolTip(this.btnFindObjectsWithoutDescription, "Find database objects without a description");
+            this.btnFindObjectsWithoutDescription.UseVisualStyleBackColor = true;
+            this.btnFindObjectsWithoutDescription.Click += new System.EventHandler(this.btnFindObjectsWithoutDescription_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(574, 198);
+            this.Controls.Add(this.btnFindObjectsWithoutDescription);
             this.Controls.Add(this.btnEditConnection);
             this.Controls.Add(this.btnDocFileBrowse);
             this.Controls.Add(this.chkOpenDoc);
@@ -152,6 +169,8 @@
         private System.Windows.Forms.ErrorProvider errorProviderMainForm;
         private System.Windows.Forms.Button btnDocFileBrowse;
         private System.Windows.Forms.Button btnEditConnection;
+        private System.Windows.Forms.Button btnFindObjectsWithoutDescription;
+        private System.Windows.Forms.ToolTip ttMain;
 	}
 }
 

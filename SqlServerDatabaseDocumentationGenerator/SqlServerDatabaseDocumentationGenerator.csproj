@@ -75,6 +75,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="third-party\PetaPoco.cs" />
     <Compile Include="Utility\IDbObjectExtension.cs" />
+    <Compile Include="Utility\IEnumerableExtension.cs" />
     <Compile Include="Utility\SqlConnectionTester.cs" />
   </ItemGroup>
   <ItemGroup>

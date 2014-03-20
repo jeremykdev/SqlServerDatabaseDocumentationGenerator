@@ -24,5 +24,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 		public string IndexTypeDescription { get; set; }
 
         public IDbObject Parent { get; set; }
+
+        public string ObjectName { get { return this.IndexName; } }
 	}
 }

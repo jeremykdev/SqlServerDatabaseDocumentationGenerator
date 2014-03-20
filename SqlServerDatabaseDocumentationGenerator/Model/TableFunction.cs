@@ -20,5 +20,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
         public IList<Column> Columns { get; set; }
 
         public IDbObject Parent { get; set; }
+
+        public string ObjectName { get { return this.FunctionName; } }
     }
 }

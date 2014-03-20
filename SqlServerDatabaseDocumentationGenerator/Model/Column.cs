@@ -11,6 +11,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 
 		public string ColumnName { get; set; }
 
+
+
 		/// <summary>
 		/// Built in data type or data type from which user defined type derives
 		/// </summary>
@@ -38,5 +40,11 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 
         public IDbObject Parent { get; set; }
 
-	}
+
+
+        public string ObjectName
+        {
+            get { return this.ColumnName; }
+        }
+    }
 }
