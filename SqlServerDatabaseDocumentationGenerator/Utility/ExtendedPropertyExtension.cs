@@ -47,6 +47,27 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility
             return sb.ToString();
         }
 
+        public static string CreateIDbObjectDescriptionSqlCommandText(this IDbObject obj)
+        {
+            if (obj is Database)
+            {
+                return (obj as Database).CreateDescriptionSqlCommandText();
+            }
+
+            if (obj is Schema)
+            {
+                return (obj as Schema).CreateDescriptionSqlCommandText();
+            }
+
+            if (obj is Table)
+            {
+                return (obj as Table).CreateDescriptionSqlCommandText();
+            }
+
+            //TODO: support additional types
+
+            return String.Empty;
+        }
 
         public static string CreateDescriptionSqlCommandText(this Database db)
         {
