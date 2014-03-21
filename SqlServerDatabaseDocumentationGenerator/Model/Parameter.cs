@@ -26,7 +26,9 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 
         public int ObjectId { get; set; }
 
-        public string ObjectName { get { return this.ParameterName; } } 
+        public string ObjectName { get { return this.ParameterName; } }
+
+        public string ObjectFullDisplayName { get { return this.ParameterName; } } 
 
     }
 }

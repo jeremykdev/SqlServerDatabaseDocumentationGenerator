@@ -48,11 +48,11 @@
             // 
             // ObjectName
             // 
-            this.ObjectName.DataPropertyName = "ObjectName";
+            this.ObjectName.DataPropertyName = "ObjectFullDisplayName";
             this.ObjectName.HeaderText = "Object Name";
             this.ObjectName.Name = "ObjectName";
             this.ObjectName.ReadOnly = true;
-            this.ObjectName.Width = 250;
+            this.ObjectName.Width = 330;
             // 
             // FrmObjectsWithoutDescription
             // 

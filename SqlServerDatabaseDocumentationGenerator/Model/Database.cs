@@ -18,12 +18,9 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 
         //Database does not have a parent object
         public IDbObject Parent { get { return null; } set { } }
+        
+        public string ObjectName { get { return this.DatabaseName; } }
 
-
-
-        public string ObjectName
-        {
-            get { return this.DatabaseName; }
-        }
+        public string ObjectFullDisplayName { get { return this.DatabaseName; } }
     }
 }

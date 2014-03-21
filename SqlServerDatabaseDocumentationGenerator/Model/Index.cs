@@ -26,5 +26,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
         public IDbObject Parent { get; set; }
 
         public string ObjectName { get { return this.IndexName; } }
+
+        public string ObjectFullDisplayName { get { return this.IndexName; } }
 	}
 }

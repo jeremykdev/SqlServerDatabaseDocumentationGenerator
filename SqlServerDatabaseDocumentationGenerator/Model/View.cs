@@ -30,9 +30,9 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
          }
 
 
-		public int ObjectId
-		{
-            get { return this.ViewId; }
+		public int ObjectId { get { return this.ViewId; }
 		}
+
+        public string ObjectFullDisplayName { get { return String.Format("{0}.{1}", this.Parent.ObjectName, this.ObjectName); } }
 	}
 }

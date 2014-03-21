@@ -9,6 +9,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 	{
         public string ObjectName { get { return this.SchemaName; } }
 
+        public string ObjectFullDisplayName { get { return this.ObjectName; } }
+
 		public string SchemaName { get; set; }
 
 		public int SchemaId { get; set; }

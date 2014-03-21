@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SqlServerDatabaseDocumentationGenerator")]
+[assembly: AssemblyTitle("SqlServerDatabaseDocumentationGeneratorTest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Jeremy Knue")]
-[assembly: AssemblyProduct("SqlServerDatabaseDocumentationGenerator")]
-[assembly: AssemblyCopyright("Copyright © Jeremy Knue 2014")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("SqlServerDatabaseDocumentationGeneratorTest")]
+[assembly: AssemblyCopyright("Copyright © Microsoft 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("6d1e66bb-b85a-4199-afda-58162f704d60")]
+[assembly: Guid("9f405998-ae6e-4b18-85ee-9397c1eae097")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.23.0.0")]
-//[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

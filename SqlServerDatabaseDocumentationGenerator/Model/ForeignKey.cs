@@ -9,6 +9,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
     {
         public string ObjectName { get { return this.ForeignKeyName; } }
 
+        public string ObjectFullName { get { return this.ForeignKeyName; } }
+
         public int  ForeignKeyId { get; set; }
 
         public string ForeignKeyName { get; set; }
@@ -34,5 +36,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
         public IList<ForeignKeyColumn> ForeignKeyColumns { get; set; }
 
         public IDbObject Parent { get; set; }
+
+        public string ObjectFullDisplayName { get { return this.ObjectFullName; } }
     }
 }

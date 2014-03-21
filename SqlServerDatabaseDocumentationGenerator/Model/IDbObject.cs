@@ -14,5 +14,11 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
         IDbObject Parent { get; set; }
 
         string ObjectName { get; }
+
+        /// <summary>
+        /// Object's display name
+        /// </summary>
+        /// <example>dbo.spMySproc for a stored procedure in the 'dbo' schema with name of 'spMySproc'</example>
+        string ObjectFullDisplayName { get; }
 	}
 }

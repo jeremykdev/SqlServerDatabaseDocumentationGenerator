@@ -40,11 +40,9 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 
         public IDbObject Parent { get; set; }
 
+        public string ObjectFullDisplayName {  get { return this.ColumnName; } }
 
-
-        public string ObjectName
-        {
-            get { return this.ColumnName; }
-        }
+        public string ObjectName  { get { return this.ColumnName; } } 
+       
     }
 }
