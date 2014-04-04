@@ -28,5 +28,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
         public string ObjectName { get { return this.IndexName; } }
 
         public string ObjectFullDisplayName { get { return this.IndexName; } }
+
+        public string ObjectTypeDisplayText { get { return "Index"; } }
 	}
 }

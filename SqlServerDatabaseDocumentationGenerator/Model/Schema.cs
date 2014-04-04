@@ -30,5 +30,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 		public int ObjectId { get { return this.SchemaId; } }
 
         public IDbObject Parent { get; set; }
+
+        public string ObjectTypeDisplayText { get { return "Schema"; } }
 	}
 }

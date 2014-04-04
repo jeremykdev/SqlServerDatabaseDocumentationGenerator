@@ -38,5 +38,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
         public IDbObject Parent { get; set; }
 
         public string ObjectFullDisplayName { get { return this.ObjectFullName; } }
+
+        public string ObjectTypeDisplayText { get { return "Foreign Key"; } }
     }
 }

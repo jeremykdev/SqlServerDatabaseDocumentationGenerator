@@ -20,5 +20,11 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
         /// </summary>
         /// <example>dbo.spMySproc for a stored procedure in the 'dbo' schema with name of 'spMySproc'</example>
         string ObjectFullDisplayName { get; }
+
+        /// <summary>
+        /// Object type type display text
+        /// </summary>
+        /// <example>"Table", "Database", etc.</example>
+        string ObjectTypeDisplayText { get; }
 	}
 }
