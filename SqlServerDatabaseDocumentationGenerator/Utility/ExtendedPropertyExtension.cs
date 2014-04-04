@@ -64,6 +64,13 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility
                 return (obj as Table).CreateDescriptionSqlCommandText();
             }
 
+            if (obj is View)
+            {
+                return (obj as View).CreateDescriptionSqlCommandText();
+            }
+
+            
+
             //TODO: support additional types
 
             return String.Empty;
@@ -72,6 +79,11 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility
         public static string CreateDescriptionSqlCommandText(this Database db)
         {
             return createAddExtendedPropertySprocTextForMsDescription(db.Description);
+        }
+
+        public static string CreateDescriptionSqlCommandText(this View view)
+        {
+            return createAddExtendedPropertySprocTextForMsDescription(view.Description, "SCHEMA", view.Parent.ObjectName, "VIEW", view.ViewName);
         }
 
 

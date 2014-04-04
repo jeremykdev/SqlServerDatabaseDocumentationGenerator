@@ -1,6 +1,6 @@
 ﻿To Do List
 
-
+* Support finding objects with out a description and scripting the SQL commands to add descriptions.
 
 * In HTML documentation link data types to descriptions on MSDN or Technet
 

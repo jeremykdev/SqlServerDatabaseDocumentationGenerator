@@ -32,14 +32,15 @@ namespace net.datacowboy.DocumentationGeneratorApplication
             
             this.gvObjects.AutoGenerateColumns = false;
             this.gvObjects.DataSource = this.boundList;
-          
 
+            this.lnkCopyToClipboard.Visible = false;
 
         }
 
         private void btnShowSqlScript_Click(object sender, EventArgs e)
         {
             this.txtSqlScript.Clear();
+            this.lnkCopyToClipboard.Visible = false;
 
             MessageBox.Show("This feature not yet completed");
 
@@ -66,10 +67,19 @@ namespace net.datacowboy.DocumentationGeneratorApplication
                     }
 
                     this.txtSqlScript.Text = sb.ToString();
+                    this.lnkCopyToClipboard.Visible = true;
                 }
             }
 
            
+        }
+
+        private void lnkCopyToClipboard_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (!String.IsNullOrWhiteSpace(this.txtSqlScript.Text))
+            {
+                Clipboard.SetText(this.txtSqlScript.Text);
+            }
         }
     }
 }

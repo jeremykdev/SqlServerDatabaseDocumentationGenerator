@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.gvObjects = new System.Windows.Forms.DataGridView();
+            this.ObjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnShowSqlScript = new System.Windows.Forms.Button();
             this.lblFormDescription = new System.Windows.Forms.Label();
             this.txtSqlScript = new System.Windows.Forms.TextBox();
-            this.ObjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lnkCopyToClipboard = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.gvObjects)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,6 +50,21 @@
             this.gvObjects.Name = "gvObjects";
             this.gvObjects.Size = new System.Drawing.Size(695, 150);
             this.gvObjects.TabIndex = 0;
+            // 
+            // ObjectName
+            // 
+            this.ObjectName.DataPropertyName = "ObjectFullDisplayName";
+            this.ObjectName.HeaderText = "Object Name";
+            this.ObjectName.Name = "ObjectName";
+            this.ObjectName.ReadOnly = true;
+            this.ObjectName.Width = 150;
+            // 
+            // Description
+            // 
+            this.Description.DataPropertyName = "Description";
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            this.Description.Width = 500;
             // 
             // btnShowSqlScript
             // 
@@ -80,26 +96,23 @@
             this.txtSqlScript.Size = new System.Drawing.Size(884, 90);
             this.txtSqlScript.TabIndex = 3;
             // 
-            // ObjectName
+            // lnkCopyToClipboard
             // 
-            this.ObjectName.DataPropertyName = "ObjectFullDisplayName";
-            this.ObjectName.HeaderText = "Object Name";
-            this.ObjectName.Name = "ObjectName";
-            this.ObjectName.ReadOnly = true;
-            this.ObjectName.Width = 150;
-            // 
-            // Description
-            // 
-            this.Description.DataPropertyName = "Description";
-            this.Description.HeaderText = "Description";
-            this.Description.Name = "Description";
-            this.Description.Width = 500;
+            this.lnkCopyToClipboard.AutoSize = true;
+            this.lnkCopyToClipboard.Location = new System.Drawing.Point(16, 356);
+            this.lnkCopyToClipboard.Name = "lnkCopyToClipboard";
+            this.lnkCopyToClipboard.Size = new System.Drawing.Size(90, 13);
+            this.lnkCopyToClipboard.TabIndex = 4;
+            this.lnkCopyToClipboard.TabStop = true;
+            this.lnkCopyToClipboard.Text = "Copy to Clipboard";
+            this.lnkCopyToClipboard.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCopyToClipboard_LinkClicked);
             // 
             // FrmObjectsWithoutDescription
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(908, 378);
+            this.Controls.Add(this.lnkCopyToClipboard);
             this.Controls.Add(this.txtSqlScript);
             this.Controls.Add(this.lblFormDescription);
             this.Controls.Add(this.btnShowSqlScript);
@@ -121,5 +134,6 @@
         private System.Windows.Forms.TextBox txtSqlScript;
         private System.Windows.Forms.DataGridViewTextBoxColumn ObjectName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.LinkLabel lnkCopyToClipboard;
     }
 }
