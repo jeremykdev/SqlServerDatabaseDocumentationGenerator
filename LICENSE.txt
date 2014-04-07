@@ -34,3 +34,8 @@ Bootstrap
 Cascading style sheets code
 Bootstrap was created by Twitter and is distributed under the MIT license.
 http://getbootstrap.com/
+
+Be.Timvw.Framework
+Portions of the Be.Timvw.Framework are used 
+The Be.Timvw.Framework was created by Tim Van Wassenhove and is distributed under the Apache 2.0 license.
+http://betimvwframework.codeplex.com/

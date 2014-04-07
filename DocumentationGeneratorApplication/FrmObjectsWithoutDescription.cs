@@ -9,6 +9,8 @@ using System.Text;
 using System.Windows.Forms;
 using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model;
 using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility;
+using Be.Timvw.Framework.ComponentModel;
+using Be.Timvw.Framework.Collections.Generic;
 
 namespace net.datacowboy.DocumentationGeneratorApplication
 {
@@ -16,7 +18,7 @@ namespace net.datacowboy.DocumentationGeneratorApplication
     {
         private net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model.Database database;
 
-        private BindingList<IDbObject> boundList;
+        private SortableBindingList<IDbObject> boundList;
 
         public FrmObjectsWithoutDescription(net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model.Database database)
         {
@@ -27,15 +29,14 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 
         private void FrmObjectsWithoutDescription_Load(object sender, EventArgs e)
         {
-            this.boundList = new BindingList<IDbObject>(this.database.FindObjectsWithoutDescriptionInDatabase());
+            this.boundList = new SortableBindingList<IDbObject>(this.database.FindObjectsWithoutDescriptionInDatabase());
 
             
             this.gvObjects.AutoGenerateColumns = false;
             this.gvObjects.DataSource = this.boundList;
 
             this.lnkCopyToClipboard.Visible = false;
-
-        }
+       }
 
         private void btnShowSqlScript_Click(object sender, EventArgs e)
         {
