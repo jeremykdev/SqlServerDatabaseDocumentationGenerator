@@ -55,9 +55,9 @@ namespace net.datacowboy.DocumentationGeneratorApplication
                 {
                     var sb = new StringBuilder();
 
-                    sb.Append("USE ");
+                    sb.Append("USE [");
                     sb.Append(this.database.DatabaseName);
-                    sb.Append(";");
+                    sb.Append("];");
                     
 
 

@@ -69,6 +69,11 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility
                 return (obj as View).CreateDescriptionSqlCommandText();
             }
 
+            if (obj is StoredProcedure)
+            {
+                return (obj as StoredProcedure).CreateDescriptionSqlCommandText();
+            }
+
             
 
             //TODO: support additional types
@@ -95,6 +100,11 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility
         public static string CreateDescriptionSqlCommandText(this Table table)
         {
             return createAddExtendedPropertySprocTextForMsDescription(table.Description, "SCHEMA", table.Parent.ObjectName, "TABLE", table.TableName);
+        }
+
+        public static string CreateDescriptionSqlCommandText(this StoredProcedure sproc)
+        {
+            return createAddExtendedPropertySprocTextForMsDescription(sproc.Description, "SCHEMA", sproc.Parent.ObjectName, "PROCEDURE", sproc.ObjectName);
         }
 
     }
