@@ -1,4 +1,8 @@
-﻿using System;
+﻿//This file comes from the Be.Timvw.Framework
+//The Be.Timvw.Framework was created by Tim Van Wassenhove and is distributed under the Apache 2.0 license.
+//http://betimvwframework.codeplex.com/
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
