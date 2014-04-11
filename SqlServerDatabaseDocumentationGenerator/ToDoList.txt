@@ -2,12 +2,14 @@
 
 * Support finding objects with out a description and scripting the SQL commands to add descriptions.
 
-* Implement Sortable Binding List on grid in FrmObjectsWithoutDescription.
-	see: http://msdn.microsoft.com/en-us/library/ms993236.aspx 
+
 
 * In HTML documentation link data types to descriptions on MSDN or Technet
 
 * In HTML add internal links to navigate between objects
+
+* DONE Implement Sortable Binding List on grid in FrmObjectsWithoutDescription.
+	see: http://msdn.microsoft.com/en-us/library/ms993236.aspx 
 
 * DONE: Support user defined functions: scalar and table
 
