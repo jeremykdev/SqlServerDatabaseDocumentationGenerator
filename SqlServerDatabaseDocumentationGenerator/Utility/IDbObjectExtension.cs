@@ -49,7 +49,14 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility
             if (schema.Tables != null && schema.Tables.Count > 0)
             {
                 objList.AddRange(schema.Tables.ToArray<IDbObject>().FindObjectsWithoutDescription());
-                //TODO: get columns
+                
+                //get columns
+                for (int t = 0; t < schema.Tables.Count; t++)
+                {
+                    var table = schema.Tables[t];
+                    objList.AddRange(table.Columns.ToArray<IDbObject>().FindObjectsWithoutDescription());
+                }
+
             }
 
             if (schema.Views.HasAny())

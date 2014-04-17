@@ -43,7 +43,6 @@ namespace net.datacowboy.DocumentationGeneratorApplication
             this.txtSqlScript.Clear();
             this.lnkCopyToClipboard.Visible = false;
 
-            MessageBox.Show("This feature not yet completed");
 
             if (this.boundList.HasAny())
             {

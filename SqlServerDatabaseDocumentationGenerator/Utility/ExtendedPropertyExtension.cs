@@ -84,9 +84,10 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility
                 return (obj as TableFunction).CreateDescriptionSqlCommandText();
             }
 
-            
-
-            //TODO: support additional types
+            if (obj is Column)
+            {
+                return (obj as Column).CreateDescriptionSqlCommandText();
+            }
 
             return String.Empty;
         }
@@ -125,6 +126,21 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility
         public static string CreateDescriptionSqlCommandText(this TableFunction func)
         {
             return createAddExtendedPropertySprocTextForMsDescription(func.Description, "SCHEMA", func.Parent.ObjectName, "FUNCTION", func.FunctionName);
+        }
+
+
+        public static string CreateDescriptionSqlCommandText(this Column column)
+        {
+            //only applies to columns owned by a table
+            if (column.Parent is Table)
+            {
+                return createAddExtendedPropertySprocTextForMsDescription(column.Description, "SCHEMA", column.Parent.Parent.ObjectName, "TABLE", column.Parent.ObjectName, "COLUMN", column.ColumnName);
+            }
+            else
+            {
+                return String.Empty;
+            }
+
         }
 
     }
