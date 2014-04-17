@@ -63,7 +63,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
                                     ON ( EP.class = 1 AND EP.name = 'MS_Description' AND EP.major_id = J.object_id AND EP.minor_id = 0 )
                           
                             WHERE J.schema_id = @0
-	                            AND J.[type] = 'TF'
+	                            AND J.[type] IN ( 'TF', 'IF' )
 
                             ORDER BY J.[name];", schema.SchemaId);
 

@@ -54,13 +54,13 @@
             this.lblServer.AutoSize = true;
             this.lblServer.Location = new System.Drawing.Point(13, 13);
             this.lblServer.Name = "lblServer";
-            this.lblServer.Size = new System.Drawing.Size(38, 13);
+            this.lblServer.Size = new System.Drawing.Size(107, 13);
             this.lblServer.TabIndex = 0;
-            this.lblServer.Text = "Server";
+            this.lblServer.Text = "Data Source (Server)";
             // 
             // txtServer
             // 
-            this.txtServer.Location = new System.Drawing.Point(90, 10);
+            this.txtServer.Location = new System.Drawing.Point(143, 10);
             this.txtServer.Name = "txtServer";
             this.txtServer.Size = new System.Drawing.Size(214, 20);
             this.txtServer.TabIndex = 1;
@@ -71,13 +71,13 @@
             this.lblDatabase.AutoSize = true;
             this.lblDatabase.Location = new System.Drawing.Point(13, 46);
             this.lblDatabase.Name = "lblDatabase";
-            this.lblDatabase.Size = new System.Drawing.Size(53, 13);
+            this.lblDatabase.Size = new System.Drawing.Size(125, 13);
             this.lblDatabase.TabIndex = 2;
-            this.lblDatabase.Text = "Database";
+            this.lblDatabase.Text = "Initial Catalog (Database)";
             // 
             // txtDatabase
             // 
-            this.txtDatabase.Location = new System.Drawing.Point(90, 46);
+            this.txtDatabase.Location = new System.Drawing.Point(141, 46);
             this.txtDatabase.Name = "txtDatabase";
             this.txtDatabase.Size = new System.Drawing.Size(214, 20);
             this.txtDatabase.TabIndex = 3;
@@ -207,7 +207,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 292);
+            this.ClientSize = new System.Drawing.Size(391, 292);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnTest);

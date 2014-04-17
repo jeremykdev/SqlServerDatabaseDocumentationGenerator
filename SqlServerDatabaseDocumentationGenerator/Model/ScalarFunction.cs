@@ -32,6 +32,6 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 
         public string ObjectFullDisplayName { get { return String.Format("{0}.{1}", this.Parent.ObjectName, this.ObjectName); } }
 
-        public string ObjectTypeDisplayText { get { return "Function"; } }
+        public string ObjectTypeDisplayText { get { return "Function (scalar)"; } }
     }
 }

@@ -74,6 +74,16 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility
                 return (obj as StoredProcedure).CreateDescriptionSqlCommandText();
             }
 
+            if (obj is ScalarFunction)
+            {
+                return (obj as ScalarFunction).CreateDescriptionSqlCommandText();
+            }
+
+            if (obj is TableFunction)
+            {
+                return (obj as TableFunction).CreateDescriptionSqlCommandText();
+            }
+
             
 
             //TODO: support additional types
@@ -105,6 +115,16 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility
         public static string CreateDescriptionSqlCommandText(this StoredProcedure sproc)
         {
             return createAddExtendedPropertySprocTextForMsDescription(sproc.Description, "SCHEMA", sproc.Parent.ObjectName, "PROCEDURE", sproc.ObjectName);
+        }
+
+        public static string CreateDescriptionSqlCommandText(this ScalarFunction func)
+        {
+            return createAddExtendedPropertySprocTextForMsDescription(func.Description, "SCHEMA", func.Parent.ObjectName, "FUNCTION", func.FunctionName);
+        }
+
+        public static string CreateDescriptionSqlCommandText(this TableFunction func)
+        {
+            return createAddExtendedPropertySprocTextForMsDescription(func.Description, "SCHEMA", func.Parent.ObjectName, "FUNCTION", func.FunctionName);
         }
 
     }
