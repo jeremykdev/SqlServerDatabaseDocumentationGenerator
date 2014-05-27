@@ -66,7 +66,19 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility
 
             if (schema.StoredProcedures.HasAny())
             {
-                objList.AddRange(schema.StoredProcedures.ToArray<IDbObject>().FindObjectsWithoutDescription());
+
+                var spList = schema.StoredProcedures.ToArray<IDbObject>().FindObjectsWithoutDescription();
+
+                if (spList.HasAny())
+                {
+                    objList.AddRange(spList);
+
+                    //TODO: add stored procedure parameters
+
+                }
+
+
+
             }
 
             if (schema.TableFunctions.HasAny() )
