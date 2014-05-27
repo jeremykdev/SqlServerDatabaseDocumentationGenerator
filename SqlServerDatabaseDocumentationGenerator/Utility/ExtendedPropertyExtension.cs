@@ -89,6 +89,11 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility
                 return (obj as Column).CreateDescriptionSqlCommandText();
             }
 
+            if (obj is Parameter)
+            {
+                return (obj as Parameter).CreateDescriptionSqlCommandText();
+            }
+
             return String.Empty;
         }
 
@@ -128,6 +133,15 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility
             return createAddExtendedPropertySprocTextForMsDescription(func.Description, "SCHEMA", func.Parent.ObjectName, "FUNCTION", func.FunctionName);
         }
 
+        /// <summary>
+        /// Applied only to stored procedure parameters
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public static string CreateDescriptionSqlCommandText(this Parameter param)
+        {
+            return createAddExtendedPropertySprocTextForMsDescription(param.Description, "SCHEMA", param.Parent.Parent.ObjectName, "PROCEDURE", param.Parent.ObjectName, "PARAMETER", param.ParameterName);
+        }
 
         public static string CreateDescriptionSqlCommandText(this Column column)
         {

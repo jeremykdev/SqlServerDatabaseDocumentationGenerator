@@ -30,7 +30,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 
         public string ObjectFullDisplayName { get { return this.ParameterName; } }
 
-        public string ObjectTypeDisplayText { get { return "Parameter"; } }
+        public string ObjectTypeDisplayText { get { return String.Format("Parameter of {0}", this.Parent.ObjectFullDisplayName);  } }
 
     }
 }

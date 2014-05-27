@@ -71,10 +71,20 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility
 
                 if (spList.HasAny())
                 {
-                    objList.AddRange(spList);
+                    for (int p = 0; p < spList.Count(); p++)
+                    {
+                        objList.Add(spList[p]);
 
-                    //TODO: add stored procedure parameters
+                        StoredProcedure sproc = spList[p] as StoredProcedure;
 
+                        var paramList = sproc.Parameters.ToArray<IDbObject>().FindObjectsWithoutDescription();
+
+                        if (paramList.HasAny())
+                        {
+                            objList.AddRange(paramList);
+                        }
+
+                    }
                 }
 
 
