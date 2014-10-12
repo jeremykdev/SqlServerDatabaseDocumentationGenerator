@@ -1,4 +1,4 @@
-This project (SqlServerDatabaseDocumentationGenerator) is release under the MIT license.
+This project (SqlServerDatabaseDocumentationGenerator) is released under the MIT license.
 
 The MIT License (MIT)
 
