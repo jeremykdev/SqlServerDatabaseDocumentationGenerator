@@ -104,7 +104,7 @@
             // 
             // btnDocFileBrowse
             // 
-            this.btnDocFileBrowse.Location = new System.Drawing.Point(409, 87);
+            this.btnDocFileBrowse.Location = new System.Drawing.Point(421, 87);
             this.btnDocFileBrowse.Name = "btnDocFileBrowse";
             this.btnDocFileBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnDocFileBrowse.TabIndex = 4;
@@ -115,7 +115,7 @@
             // 
             // btnEditConnection
             // 
-            this.btnEditConnection.Location = new System.Drawing.Point(489, 26);
+            this.btnEditConnection.Location = new System.Drawing.Point(497, 26);
             this.btnEditConnection.Name = "btnEditConnection";
             this.btnEditConnection.Size = new System.Drawing.Size(75, 23);
             this.btnEditConnection.TabIndex = 2;
@@ -139,7 +139,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(574, 198);
+            this.ClientSize = new System.Drawing.Size(601, 198);
             this.Controls.Add(this.btnFindObjectsWithoutDescription);
             this.Controls.Add(this.btnEditConnection);
             this.Controls.Add(this.btnDocFileBrowse);

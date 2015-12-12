@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Configuration;
 using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection;
 using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Document;
 using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility;
@@ -22,12 +23,32 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 		{
 			//provide defaults
 
-			this.txtConnectionString.Text = @"Data Source=localhost\sqlexpress; Initial Catalog=AdventureWorks; Integrated Security=true;";
+            this.txtConnectionString.Text = this.getConnectionStringFromAppConfig() ?? String.Empty;
 
 			this.txtDocFile.Text = "documentation.html";
 
 
 		}
+
+        /// <summary>
+        /// Get database connection string from app.config file
+        /// Connection string named "default" in app.config
+        /// </summary>
+        /// <returns></returns>
+        private string getConnectionStringFromAppConfig()
+        {
+            string connString = null;
+
+           
+            var config = ConfigurationManager.ConnectionStrings["default"];
+            if (config != null)
+            {
+                connString = config.ConnectionString;
+            }
+            
+
+            return connString;
+        }
 
 
         
