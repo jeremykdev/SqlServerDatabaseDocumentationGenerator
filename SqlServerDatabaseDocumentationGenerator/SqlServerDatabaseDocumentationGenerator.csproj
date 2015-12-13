@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Document\DocumentGeneratorConfiguration.cs" />
     <Compile Include="Inspection\CommonInspector.cs" />
     <Compile Include="Utility\ConnectionTestResult.cs" />
     <Compile Include="Document\DatabaseHtmlDocumentGenerator.cs" />

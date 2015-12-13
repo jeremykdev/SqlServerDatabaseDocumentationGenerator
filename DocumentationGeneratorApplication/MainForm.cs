@@ -140,6 +140,15 @@ namespace net.datacowboy.DocumentationGeneratorApplication
         }
 
 
+        private DocumentGeneratorConfiguration createDocumentGeneratorConfigurationFroUi()
+        {
+            var config = new DocumentGeneratorConfiguration();
+
+            config.ForeignKeyToTableHyperLink = this.chkFkToTableHyperLink.Checked;
+
+            return config;
+        }
+
 		private void btnGenerateDoc_Click(object sender, EventArgs e)
 		{
             if (!this.validateFormInput(true))
@@ -152,6 +161,8 @@ namespace net.datacowboy.DocumentationGeneratorApplication
             this.Cursor = Cursors.WaitCursor;
             Application.DoEvents();
 
+            DocumentGeneratorConfiguration docGenConfig = this.createDocumentGeneratorConfigurationFroUi();
+
             //perform database operations aysnc
             var taskMeta = getDatabaseMetaDataAysnc(this.txtConnectionString.Text);
 
@@ -163,7 +174,7 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 
 			using (var sw = new StreamWriter(docFilePath, false))
 			{
-				var str = gen.ExportToHtml(metadata, sw);
+				var str = gen.ExportToHtml(metadata, sw, docGenConfig);
 			}
 
 
@@ -262,6 +273,7 @@ namespace net.datacowboy.DocumentationGeneratorApplication
             this.btnGenerateDoc.Enabled = false;
             this.btnFindObjectsWithoutDescription.Enabled = false;
             this.chkOpenDoc.Enabled = false;
+            this.chkFkToTableHyperLink.Enabled = false;
         }
 
 
@@ -278,6 +290,7 @@ namespace net.datacowboy.DocumentationGeneratorApplication
             this.btnGenerateDoc.Enabled = true;
             this.btnFindObjectsWithoutDescription.Enabled = true;
             this.chkOpenDoc.Enabled = true;
+            this.chkFkToTableHyperLink.Enabled = true;
         }
 
 	}

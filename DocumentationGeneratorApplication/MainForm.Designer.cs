@@ -40,6 +40,7 @@
             this.btnEditConnection = new System.Windows.Forms.Button();
             this.btnFindObjectsWithoutDescription = new System.Windows.Forms.Button();
             this.ttMain = new System.Windows.Forms.ToolTip(this.components);
+            this.chkFkToTableHyperLink = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderMainForm)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,7 +78,7 @@
             // 
             // btnGenerateDoc
             // 
-            this.btnGenerateDoc.Location = new System.Drawing.Point(16, 149);
+            this.btnGenerateDoc.Location = new System.Drawing.Point(16, 192);
             this.btnGenerateDoc.Name = "btnGenerateDoc";
             this.btnGenerateDoc.Size = new System.Drawing.Size(150, 23);
             this.btnGenerateDoc.TabIndex = 6;
@@ -126,7 +127,7 @@
             // 
             // btnFindObjectsWithoutDescription
             // 
-            this.btnFindObjectsWithoutDescription.Location = new System.Drawing.Point(191, 149);
+            this.btnFindObjectsWithoutDescription.Location = new System.Drawing.Point(191, 192);
             this.btnFindObjectsWithoutDescription.Name = "btnFindObjectsWithoutDescription";
             this.btnFindObjectsWithoutDescription.Size = new System.Drawing.Size(192, 23);
             this.btnFindObjectsWithoutDescription.TabIndex = 7;
@@ -135,11 +136,24 @@
             this.btnFindObjectsWithoutDescription.UseVisualStyleBackColor = true;
             this.btnFindObjectsWithoutDescription.Click += new System.EventHandler(this.btnFindObjectsWithoutDescription_Click);
             // 
+            // chkFkToTableHyperLink
+            // 
+            this.chkFkToTableHyperLink.AutoSize = true;
+            this.chkFkToTableHyperLink.Checked = true;
+            this.chkFkToTableHyperLink.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkFkToTableHyperLink.Location = new System.Drawing.Point(15, 138);
+            this.chkFkToTableHyperLink.Name = "chkFkToTableHyperLink";
+            this.chkFkToTableHyperLink.Size = new System.Drawing.Size(286, 17);
+            this.chkFkToTableHyperLink.TabIndex = 8;
+            this.chkFkToTableHyperLink.Text = "Generate Foreign Key to Table Hyperlinks in Document";
+            this.chkFkToTableHyperLink.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(601, 198);
+            this.ClientSize = new System.Drawing.Size(601, 227);
+            this.Controls.Add(this.chkFkToTableHyperLink);
             this.Controls.Add(this.btnFindObjectsWithoutDescription);
             this.Controls.Add(this.btnEditConnection);
             this.Controls.Add(this.btnDocFileBrowse);
@@ -171,6 +185,7 @@
         private System.Windows.Forms.Button btnEditConnection;
         private System.Windows.Forms.Button btnFindObjectsWithoutDescription;
         private System.Windows.Forms.ToolTip ttMain;
+        private System.Windows.Forms.CheckBox chkFkToTableHyperLink;
 	}
 }
 

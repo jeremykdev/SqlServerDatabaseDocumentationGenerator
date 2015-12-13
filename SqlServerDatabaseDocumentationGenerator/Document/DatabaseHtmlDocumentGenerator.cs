@@ -15,8 +15,24 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Document
 
             private readonly string projectUrl = "http://jeremykdev.github.io/SqlServerDatabaseDocumentationGenerator/";
 			
-			public string ExportToHtml(Database db, TextWriter textWriter)
+			public string ExportToHtml(Database db, TextWriter textWriter, DocumentGeneratorConfiguration docGenConfig)
 			{
+                if (db == null)
+                {
+                    throw new ArgumentNullException("db");
+                }
+
+                if (textWriter == null)
+                {
+                    throw new ArgumentNullException("textWriter");
+                }
+
+                if (docGenConfig == null)
+                {
+                    throw new ArgumentNullException("docGenConfig");
+                }
+
+
 				//var sw = new StringWriter();
 
 				using(var hw = new HtmlTextWriter(textWriter))
@@ -260,10 +276,13 @@ THE SOFTWARE.");
 								{
 									var table = schema.Tables[t];
 
-                                    // create internel hyperlink target
-                                    hw.AddAttribute("id", table.GetObjectAnchorId());
-                                    hw.RenderBeginTag(HtmlTextWriterTag.A);                                     
-                                    hw.RenderEndTag(); //a
+                                    if (docGenConfig.ForeignKeyToTableHyperLink)
+                                    {
+                                        // create internel hyperlink target
+                                        hw.AddAttribute("id", table.GetObjectAnchorId());
+                                        hw.RenderBeginTag(HtmlTextWriterTag.A);
+                                        hw.RenderEndTag(); //a
+                                    }
 
 									bool hasIndexes = (table.Indexes != null && table.Indexes.Count > 0);
 
@@ -533,15 +552,21 @@ THE SOFTWARE.");
                                             hw.RenderEndTag(); //td
 
                                             hw.RenderBeginTag(HtmlTextWriterTag.Td);
-                                            hw.WriteEncodedText(String.Format("{0}.{1} ({2}) ", fk.ReferencedObjectSchemaName, fk.ReferencedObjectName, String.Join(", ",fk.GetForeignKeyReferenceColumnNames())));
+                                            //hw.WriteEncodedText(String.Format("{0}.{1} ({2})", fk.ReferencedObjectSchemaName, fk.ReferencedObjectName, String.Join(", ",fk.GetForeignKeyReferenceColumnNames())));
 
-                                             
 
-                                            hw.AddAttribute("href", fk.GetFkTargetAnchorId());
-                                            hw.RenderBeginTag(HtmlTextWriterTag.A);
-                                            hw.WriteEncodedText("table ->");
-
-                                            hw.RenderEndTag(); //a
+                                            if (docGenConfig.ForeignKeyToTableHyperLink)
+                                            {
+                                                hw.AddAttribute("href", fk.GetFkTargetAnchorId());
+                                                hw.RenderBeginTag(HtmlTextWriterTag.A);
+                                                hw.WriteEncodedText(String.Format("{0}.{1} ({2})", fk.ReferencedObjectSchemaName, fk.ReferencedObjectName, String.Join(", ", fk.GetForeignKeyReferenceColumnNames())));
+                                                //hw.WriteEncodedText("table ->");
+                                                hw.RenderEndTag(); //a
+                                            }
+                                            else
+                                            {
+                                                hw.WriteEncodedText(String.Format("{0}.{1} ({2})", fk.ReferencedObjectSchemaName, fk.ReferencedObjectName, String.Join(", ", fk.GetForeignKeyReferenceColumnNames())));
+                                            }
 
                                             hw.RenderEndTag(); //td
 
