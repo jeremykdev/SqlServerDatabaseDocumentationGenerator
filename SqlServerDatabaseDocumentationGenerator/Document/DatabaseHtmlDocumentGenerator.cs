@@ -34,8 +34,9 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Document
 
 
 					hw.Write("<!-- ");
-					hw.WriteEncodedText(@"Bootstrap CSS is included.  Bootstrap is released under the MIT license and is copyright 2014 Twitter.
-					The MIT License (MIT)
+					hw.WriteEncodedText(@"
+Bootstrap CSS is included.  Bootstrap is released under the MIT license and is copyright 2014 Twitter.
+The MIT License (MIT)
 
 Copyright (c) 2011-2014 Twitter, Inc
 
@@ -258,6 +259,11 @@ THE SOFTWARE.");
 								for (int t = 0; t < schema.Tables.Count; t++)
 								{
 									var table = schema.Tables[t];
+
+                                    // create internel hyperlink target
+                                    hw.AddAttribute("id", table.GetObjectAnchorId());
+                                    hw.RenderBeginTag(HtmlTextWriterTag.A);                                     
+                                    hw.RenderEndTag(); //a
 
 									bool hasIndexes = (table.Indexes != null && table.Indexes.Count > 0);
 
@@ -527,7 +533,16 @@ THE SOFTWARE.");
                                             hw.RenderEndTag(); //td
 
                                             hw.RenderBeginTag(HtmlTextWriterTag.Td);
-                                            hw.WriteEncodedText(String.Format("{0}.{1} ({2})", fk.ReferencedObjectSchemaName, fk.ReferencedObjectName, String.Join(", ",fk.GetForeignKeyReferenceColumnNames())));
+                                            hw.WriteEncodedText(String.Format("{0}.{1} ({2}) ", fk.ReferencedObjectSchemaName, fk.ReferencedObjectName, String.Join(", ",fk.GetForeignKeyReferenceColumnNames())));
+
+                                             
+
+                                            hw.AddAttribute("href", fk.GetFkTargetAnchorId());
+                                            hw.RenderBeginTag(HtmlTextWriterTag.A);
+                                            hw.WriteEncodedText("table ->");
+
+                                            hw.RenderEndTag(); //a
+
                                             hw.RenderEndTag(); //td
 
                                             

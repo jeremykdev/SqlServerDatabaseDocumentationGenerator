@@ -8,6 +8,41 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Document
 {
 	public static class FormattingExtensionMethod
 	{
+        /// <summary>
+        /// Get the text for a unique ID for Anchoring the object within the document
+        /// </summary>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        public static string GetObjectAnchorId(this IDbObject targetObj)
+        {
+            string result = null;
+
+            if (targetObj != null)
+            {
+                result = String.Concat("_", targetObj.ObjectId);
+            }
+
+            return result ?? String.Empty;
+
+        }
+
+        /// <summary>
+        /// Get the target text for a foreign key by anchor ID
+        /// </summary>
+        /// <param name="fk"></param>
+        /// <returns></returns>
+        public static string GetFkTargetAnchorId(this ForeignKey fk)
+        {
+            string result = null;
+
+            if (fk != null)
+            {
+                result = String.Concat("#_", fk.ReferencedObjectId);
+            }
+
+            return result ?? String.Empty;
+        }
+
 
 		public static string ToYesNo(this bool input)
 		{
