@@ -312,6 +312,12 @@ THE SOFTWARE.");
 
 									hw.RenderBeginTag(HtmlTextWriterTag.Th);
 									hw.Write("System Data Type");
+
+                                    if (table.ContainsColumnsWithUserDefinedDataType())
+                                    {
+                                        hw.Write(" / User Defined Type");
+                                    }
+
 									hw.RenderEndTag(); //th
 
 									hw.RenderBeginTag(HtmlTextWriterTag.Th);
@@ -364,7 +370,11 @@ THE SOFTWARE.");
 											hw.WriteEncodedText(" (identity)");
 										}
 
-                                        
+                                        if (col.IsUserDefinedType)
+                                        {
+                                            hw.Write(" / ");
+                                            hw.WriteEncodedText(col.TypeName);
+                                        }
 
 										hw.RenderEndTag();  //td
 
@@ -630,6 +640,12 @@ THE SOFTWARE.");
 
                                     hw.RenderBeginTag(HtmlTextWriterTag.Th);
                                     hw.Write("System Data Type");
+
+                                    if (view.ContainsColumnsWithUserDefinedDataType())
+                                    {
+                                        hw.Write(" / User Defined Type");
+                                    }
+
                                     hw.RenderEndTag(); //th
 
                                     hw.RenderBeginTag(HtmlTextWriterTag.Th);
@@ -677,6 +693,12 @@ THE SOFTWARE.");
                                         if (col.IsIdentity)
                                         {
                                             hw.WriteEncodedText(" (identity)");
+                                        }
+
+                                        if (col.IsUserDefinedType)
+                                        {
+                                            hw.Write(" / ");
+                                            hw.WriteEncodedText(col.TypeName);
                                         }
                                         hw.RenderEndTag();  //td
 

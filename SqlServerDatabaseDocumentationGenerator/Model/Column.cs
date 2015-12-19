@@ -38,6 +38,11 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 
 		public bool IsComputed { get; set; }
 
+        //the TypeName value will be the same as BaseDataTypeName, unless this column data type is a user defined type
+        public string TypeName { get; set; }
+
+        public bool IsUserDefinedType { get; set; }
+
         public IDbObject Parent { get; set; }
 
         //Display column names as Schema.TableName.ColumnName

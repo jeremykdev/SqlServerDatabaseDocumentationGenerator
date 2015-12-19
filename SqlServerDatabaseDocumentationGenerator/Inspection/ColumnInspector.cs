@@ -59,6 +59,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 						, I.COLUMN_DEFAULT AS DefaultValue
 						, C.is_identity AS IsIdentity
 						, C.is_computed AS IsComputed
+                        , Y.name AS TypeName
+						, Y.is_user_defined AS IsUserDefinedType
 
 					FROM sys.views AS V	
 						INNER JOIN sys.schemas AS S
@@ -95,6 +97,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 						, I.COLUMN_DEFAULT AS DefaultValue
 						, C.is_identity AS IsIdentity
 						, C.is_computed AS IsComputed
+                        , Y.name AS TypeName
+						, Y.is_user_defined AS IsUserDefinedType
 
 					FROM sys.tables AS T	
 						INNER JOIN sys.schemas AS S

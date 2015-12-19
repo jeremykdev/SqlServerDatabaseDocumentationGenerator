@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility;
 
 namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
 {
@@ -36,5 +37,24 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
         public string ObjectFullDisplayName { get { return String.Format("{0}.{1}", this.Parent.ObjectName, this.ObjectName); } }
 
         public string ObjectTypeDisplayText { get { return "View"; } }
+
+        /// <summary>
+        /// Check if the table has any columns which use a user defined data type
+        /// </summary>
+        /// <returns></returns>
+        public bool ContainsColumnsWithUserDefinedDataType()
+        {
+            bool result = false;
+
+            if (this.Columns.HasAny())
+            {
+                if (this.Columns.Where(c => c.IsUserDefinedType).Any())
+                {
+                    result = true;
+                }
+            }
+
+            return result;
+        }
 	}
 }
