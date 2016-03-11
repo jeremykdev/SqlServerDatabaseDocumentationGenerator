@@ -180,11 +180,25 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 
         private void btnTest_Click(object sender, EventArgs e)
         {
+            this.enableOrDisableUi(false);
+
             if (this.validateUiInput())
             {
                 this.testConnectionString();
             }
+
+            this.enableOrDisableUi(true);
         }
+
+        /// <summary>
+        /// Enable or disable UI controls
+        /// </summary>
+        /// <param name="enable">True to enable, false to disable</param>
+        private void enableOrDisableUi(bool enable)
+        {
+            this.Enabled = enable;
+        }
+        
 
         private void testConnectionString()
         {
