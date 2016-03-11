@@ -8,7 +8,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility
     public static class IEnumerableExtension
     {
         /// <summary>
-        /// Check if a set is null and has any members
+        /// Check if a set is not null and has any members
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="input"></param>
