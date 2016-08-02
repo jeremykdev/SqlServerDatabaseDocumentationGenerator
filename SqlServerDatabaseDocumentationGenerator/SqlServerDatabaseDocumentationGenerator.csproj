@@ -44,6 +44,9 @@
   <ItemGroup>
     <Compile Include="Document\DocumentGeneratorConfiguration.cs" />
     <Compile Include="Inspection\CommonInspector.cs" />
+    <Compile Include="Inspection\DesignIssue\DatabaseDesignIssueInspector.cs" />
+    <Compile Include="Inspection\DesignIssue\StoredProcedureDesignIssueInspector.cs" />
+    <Compile Include="Model\DesignIssueWarning.cs" />
     <Compile Include="Utility\ConnectionTestResult.cs" />
     <Compile Include="Document\DatabaseHtmlDocumentGenerator.cs" />
     <Compile Include="Document\FormattingExtensionMethod.cs" />

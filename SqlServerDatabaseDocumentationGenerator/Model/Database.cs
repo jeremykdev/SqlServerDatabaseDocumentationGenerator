@@ -24,5 +24,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
         public string ObjectFullDisplayName { get { return this.DatabaseName; } }
 
         public string ObjectTypeDisplayText { get { return "Database"; } }
+
+        public IList<DesignIssueWarning> DesignIssueWarnings { get; set; }
     }
 }

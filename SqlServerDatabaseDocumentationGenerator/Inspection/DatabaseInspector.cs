@@ -40,6 +40,10 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection
 
 				database.Schemas = schemaInspector.GetSchemas(database);
 
+                //TODO: add input parameter to control inspection for design issues
+                DesignIssue.DatabaseDesignIssueInspector designIssueInspector = new DesignIssue.DatabaseDesignIssueInspector();
+                database.DesignIssueWarnings = designIssueInspector.GetDesignIssueWarnings(database);
+
 
 			}
 
