@@ -7,3 +7,5 @@ To use this project build it using Visual Studio 2012 or later.  Then run the Do
 An example of the resulting documentation file can be viewed at http://jeremykdev.github.io/SqlServerDatabaseDocumentationGenerator/AdventureWorks-sample.html
 
 In addition to creating documentation the application can help you identify objects (tables, views, etc.) without a description in the database metabase and create the SQL script to add descriptions.
+
+Version 1.4 adds detection of Microsoft database design guideline violations such as detecting objects named using reserves keywords and user defined stored procedures named starting with 'sp_*'.
