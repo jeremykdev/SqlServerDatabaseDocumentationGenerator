@@ -11,6 +11,12 @@
 * DONE Implement Sortable Binding List on grid in FrmObjectsWithoutDescription.
 	see: http://msdn.microsoft.com/en-us/library/ms993236.aspx 
 
+* Add support for finding objects with names that include special characters
+
+* Make adding design issue warnings to UI optional
+
+* Add support for showing contraints on columns
+
 * DONE: Support user defined functions: scalar and table
 
 * DONE: Support views
