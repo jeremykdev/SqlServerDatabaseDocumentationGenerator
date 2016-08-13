@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model;
 using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Utility;
 
@@ -20,7 +21,13 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection.Desi
 
         private StoredProcedureDesignIssueInspector sprocInspector = new StoredProcedureDesignIssueInspector();
 
-        private string[] reservedWords = new string[] {
+        /// <summary>
+        /// Reserve words in SQL Server
+        /// </summary>
+        /// <remarks>
+        /// See: https://msdn.microsoft.com/en-us/library/ms189822.aspx
+        /// </remarks>
+        private readonly string[] reservedWords = new string[] {
                 "ADD",
                 "EXISTS",
                 "PRECISION",
@@ -201,8 +208,6 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection.Desi
                 "EXECUTE",
                 "PLAN",
                 "WRITETEXT",
-                "",
-                "",
                 "ABSOLUTE",
                 "EXEC",
                 "OVERLAPS",
@@ -438,7 +443,6 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection.Desi
                 "OUTPUT",
                 "ZONE",
                 "EXCEPTION",
-                "",
                 "ABSOLUTE",
                 "HOST",
                 "RELATIVE",
@@ -713,6 +717,82 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection.Desi
                 "REGR_SYY"
                  };
 
+        /// <summary>
+        /// Special characters to avoid in object names
+        /// </summary>
+        /// <remarks>
+        /// See: https://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx
+        /// </remarks>
+        private readonly char[] specialCharacters = new char[] { };
+
+        private DesignIssueWarning getDesignIssueForObjectsWithSpecialCharactersInName(Model.Database database)
+        {
+            DesignIssueWarning warning = new DesignIssueWarning()
+            {
+                Description = "Database object names should not contain special characters",
+                ReferenceUrl = new Uri("https://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx")
+            };
+
+
+            if (database == null)
+            {
+                return null; //cannot act on empty object
+            }
+
+            List<IDbObject> objectList = new List<IDbObject>();
+
+            // check Db name
+            if (this.checkForSpecialCharacters(database.ObjectName))
+            {
+                objectList.Add(database);
+            }
+
+
+            IList<IDbObject> allDbObjList = database.GetAllObjects();
+            foreach (IDbObject obj in allDbObjList)
+            {
+                if (this.checkForSpecialCharacters(obj.ObjectName))
+                {
+                    allDbObjList.Add(obj);
+                }
+            }
+
+
+            //do we have any objects?
+            if (objectList.HasAny())
+            {
+                warning.DatabaseObjects = objectList;
+            }
+            else
+            {
+                warning = null;
+            }
+
+           
+            return warning;
+        }
+
+        private bool checkForSpecialCharacters(string input)
+        {
+
+            if (input == null)
+            {
+                throw new ArgumentNullException("input");
+            }
+
+
+            bool containSpecial = false;
+            
+            //match for: whitepace, double quote, single quote, square brackets
+            Regex re = new Regex(@"[\s\""\'\[\]]+", RegexOptions.Compiled);
+
+            Match m = re.Match(input);
+            containSpecial = m.Success;
+
+            return containSpecial;
+        }
+
+
 
         private DesignIssueWarning getDesignIssueWarningForObjectNamedWithReservedWordssignIssueWarning(Model.Database database)
         {
@@ -734,51 +814,10 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection.Desi
                 objectList.Add(database as IDbObject);
             }
 
-            List<IDbObject> allDbObjList = new List<IDbObject>();
-            
-            
-            var schemas = (
-                    from s in database.Schemas
-                    select s as IDbObject
-                ).ToList();
-
-            allDbObjList.AddRange(schemas);
-
-            var tables = (
-                   from s in database.Schemas
-                   from obj in s.Tables
-                   select obj as IDbObject
-               ).ToList();
-
-            allDbObjList.AddRange(tables);
-
-            var sprocs = (
-                    from s in database.Schemas
-                    from obj in s.StoredProcedures
-                    select obj as IDbObject
-                ).ToList();
-
-            allDbObjList.AddRange(sprocs);
-
-            var scalarFuncs = (
-                    from s in database.Schemas
-                    from obj in s.ScalarFunctions
-                    select obj as IDbObject
-                ).ToList();
-
-            allDbObjList.AddRange(scalarFuncs);
+            IList<IDbObject> allDbObjList = database.GetAllObjects();
 
 
-            var tableFuncs = (
-                    from s in database.Schemas
-                    from obj in s.TableFunctions
-                    select obj as IDbObject
-                ).ToList();
-
-            allDbObjList.AddRange(tableFuncs);
-
-
-            //TODO: union objects to one collection to get one list to parse
+            // union objects to one collection to get one list to parse
             var nameViolations = (
                     from obj in allDbObjList
                     where this.reservedWords.Contains(obj.ObjectName, StringComparer.OrdinalIgnoreCase)
@@ -819,6 +858,12 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection.Desi
             if (objectNamedWithReservedWord != null)
             {
                 warningList.Add(objectNamedWithReservedWord);
+            }
+
+            DesignIssueWarning objectNameContainingSpecialChars = this.getDesignIssueForObjectsWithSpecialCharactersInName(database);
+            if (objectNameContainingSpecialChars != null)
+            {
+                warningList.Add(objectNameContainingSpecialChars);
             }
 
 
