@@ -749,11 +749,12 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection.Desi
 
 
             IList<IDbObject> allDbObjList = database.GetAllObjects();
+
             foreach (IDbObject obj in allDbObjList)
             {
                 if (this.checkForSpecialCharacters(obj.ObjectName))
                 {
-                    allDbObjList.Add(obj);
+                    objectList.Add(obj);
                 }
             }
 

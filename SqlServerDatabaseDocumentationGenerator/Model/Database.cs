@@ -65,7 +65,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
                         from sproc in sc.StoredProcedures
                         from param in sproc.Parameters
                         select param as IDbObject
-                    );
+                    ).ToList();
 
                 allDbObjList.AddRange(sprocParams);
             }
@@ -84,9 +84,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
                         from s in this.Schemas
                         from func in s.ScalarFunctions
                         from param in func.Parameters
-                        select param as IDbObject
-
-                    );
+                        select param as IDbObject 
+                    ).ToList();
 
                 allDbObjList.AddRange(scalarFuncParams);
 
@@ -108,7 +107,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
                         from tfunc in s.TableFunctions
                         from param in tfunc.Parameters
                         select param as IDbObject
-                    );
+                    ).ToList();
 
                 allDbObjList.AddRange(tfParams);
 
@@ -118,7 +117,7 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Model
                         from tfunc in s.TableFunctions
                         from param in tfunc.Parameters
                         select param as IDbObject
-                    );
+                    ).ToList();
 
                 allDbObjList.AddRange(tfCols);
 
