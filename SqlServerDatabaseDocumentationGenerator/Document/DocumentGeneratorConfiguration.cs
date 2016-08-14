@@ -10,11 +10,8 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Document
     /// </summary>
     public class DocumentGeneratorConfiguration
     {
-        public DocumentGeneratorConfiguration()
-        {
-            this.ForeignKeyToTableHyperLink = false;
-        }
-
         public bool ForeignKeyToTableHyperLink { get; set; }
+
+        public bool CheckForDesignIssues { get; set; }
     }
 }

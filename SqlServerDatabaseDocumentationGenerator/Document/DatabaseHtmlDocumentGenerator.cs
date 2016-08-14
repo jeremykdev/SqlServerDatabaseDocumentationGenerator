@@ -1278,14 +1278,14 @@ THE SOFTWARE.");
 					}
 
 
-                    //TODO: display design issues
-                    if (db.DesignIssueWarnings.HasAny())
+                    //display design issues
+                    if (docGenConfig.CheckForDesignIssues && db.DesignIssueWarnings.HasAny())
                     {
                         hw.RenderBeginTag(HtmlTextWriterTag.H2);
                         hw.WriteEncodedText(String.Format("Design Issue Warnings ({0})", db.DesignIssueWarnings.Count));
                         hw.RenderEndTag(); //h2 
 
-                        hw.AddAttribute(HtmlTextWriterAttribute.Class, "table table-bordered table-striped table-condensed schema-objects-list-container");
+                        hw.AddAttribute(HtmlTextWriterAttribute.Class, "table table-bordered table-striped table-condensed");
                         hw.RenderBeginTag(HtmlTextWriterTag.Table);
 
                          hw.RenderBeginTag(HtmlTextWriterTag.Thead);
@@ -1313,8 +1313,6 @@ THE SOFTWARE.");
                         foreach(var warn in db.DesignIssueWarnings)
                         {
                             
-
-
                             hw.RenderBeginTag(HtmlTextWriterTag.Tr);
 
 
@@ -1324,7 +1322,13 @@ THE SOFTWARE.");
 
                             
                             hw.RenderBeginTag(HtmlTextWriterTag.Td);
-                            hw.WriteEncodedText(warn.ReferenceUrl.ToString()); //TODO: add hyperlink
+                            if(warn.ReferenceUrl != null)
+                            {
+                                hw.AddAttribute("href", warn.ReferenceUrl.ToString());
+                                hw.RenderBeginTag(HtmlTextWriterTag.A);
+                                hw.WriteEncodedText(warn.ReferenceUrl.ToString());
+                                hw.RenderEndTag(); //a
+                            }
                             hw.RenderEndTag(); //td
 
                             
@@ -1332,7 +1336,7 @@ THE SOFTWARE.");
                             foreach(IDbObject obj in warn.DatabaseObjects)
                             {
                                 //hw.WriteEncodedText(obj.ObjectFullDisplayName);  //TODO: add internal hyperlinking
-                                hw.WriteEncodedText(String.Format("{0} / {1}", obj.ObjectFullDisplayName, obj.ObjectTypeDisplayText));
+                                hw.WriteEncodedText(String.Format("{0} ( {1} )", obj.ObjectFullDisplayName, obj.ObjectTypeDisplayText));
                                 hw.WriteBreak(); //br
                                 
                             }

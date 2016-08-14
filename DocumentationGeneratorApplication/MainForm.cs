@@ -146,6 +146,8 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 
             config.ForeignKeyToTableHyperLink = this.chkFkToTableHyperLink.Checked;
 
+            config.CheckForDesignIssues = this.chkCheckForDatabaseDesignIssues.Checked;
+
             return config;
         }
 
@@ -274,6 +276,7 @@ namespace net.datacowboy.DocumentationGeneratorApplication
             this.btnFindObjectsWithoutDescription.Enabled = false;
             this.chkOpenDoc.Enabled = false;
             this.chkFkToTableHyperLink.Enabled = false;
+            this.chkCheckForDatabaseDesignIssues.Enabled = false;
         }
 
 
@@ -291,6 +294,7 @@ namespace net.datacowboy.DocumentationGeneratorApplication
             this.btnFindObjectsWithoutDescription.Enabled = true;
             this.chkOpenDoc.Enabled = true;
             this.chkFkToTableHyperLink.Enabled = true;
+            this.chkCheckForDatabaseDesignIssues.Enabled = true;
         }
 
 	}

@@ -41,6 +41,7 @@
             this.btnFindObjectsWithoutDescription = new System.Windows.Forms.Button();
             this.ttMain = new System.Windows.Forms.ToolTip(this.components);
             this.chkFkToTableHyperLink = new System.Windows.Forms.CheckBox();
+            this.chkCheckForDatabaseDesignIssues = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderMainForm)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,10 +79,10 @@
             // 
             // btnGenerateDoc
             // 
-            this.btnGenerateDoc.Location = new System.Drawing.Point(16, 192);
+            this.btnGenerateDoc.Location = new System.Drawing.Point(12, 209);
             this.btnGenerateDoc.Name = "btnGenerateDoc";
             this.btnGenerateDoc.Size = new System.Drawing.Size(150, 23);
-            this.btnGenerateDoc.TabIndex = 6;
+            this.btnGenerateDoc.TabIndex = 8;
             this.btnGenerateDoc.Text = "Generate Documentation";
             this.ttMain.SetToolTip(this.btnGenerateDoc, "Generate documentation file");
             this.btnGenerateDoc.UseVisualStyleBackColor = true;
@@ -127,10 +128,10 @@
             // 
             // btnFindObjectsWithoutDescription
             // 
-            this.btnFindObjectsWithoutDescription.Location = new System.Drawing.Point(191, 192);
+            this.btnFindObjectsWithoutDescription.Location = new System.Drawing.Point(187, 209);
             this.btnFindObjectsWithoutDescription.Name = "btnFindObjectsWithoutDescription";
             this.btnFindObjectsWithoutDescription.Size = new System.Drawing.Size(192, 23);
-            this.btnFindObjectsWithoutDescription.TabIndex = 7;
+            this.btnFindObjectsWithoutDescription.TabIndex = 9;
             this.btnFindObjectsWithoutDescription.Text = "Find Objects Without a Description";
             this.ttMain.SetToolTip(this.btnFindObjectsWithoutDescription, "Find database objects without a description");
             this.btnFindObjectsWithoutDescription.UseVisualStyleBackColor = true;
@@ -144,15 +145,27 @@
             this.chkFkToTableHyperLink.Location = new System.Drawing.Point(15, 138);
             this.chkFkToTableHyperLink.Name = "chkFkToTableHyperLink";
             this.chkFkToTableHyperLink.Size = new System.Drawing.Size(286, 17);
-            this.chkFkToTableHyperLink.TabIndex = 8;
+            this.chkFkToTableHyperLink.TabIndex = 6;
             this.chkFkToTableHyperLink.Text = "Generate Foreign Key to Table Hyperlinks in Document";
             this.chkFkToTableHyperLink.UseVisualStyleBackColor = true;
+            // 
+            // chkCheckForDatabaseDesignIssues
+            // 
+            this.chkCheckForDatabaseDesignIssues.AutoSize = true;
+            this.chkCheckForDatabaseDesignIssues.Location = new System.Drawing.Point(16, 162);
+            this.chkCheckForDatabaseDesignIssues.Name = "chkCheckForDatabaseDesignIssues";
+            this.chkCheckForDatabaseDesignIssues.Size = new System.Drawing.Size(190, 17);
+            this.chkCheckForDatabaseDesignIssues.TabIndex = 7;
+            this.chkCheckForDatabaseDesignIssues.Text = "Check for Database Design Issues";
+            this.ttMain.SetToolTip(this.chkCheckForDatabaseDesignIssues, "Check for possible database design issues");
+            this.chkCheckForDatabaseDesignIssues.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(601, 227);
+            this.ClientSize = new System.Drawing.Size(601, 266);
+            this.Controls.Add(this.chkCheckForDatabaseDesignIssues);
             this.Controls.Add(this.chkFkToTableHyperLink);
             this.Controls.Add(this.btnFindObjectsWithoutDescription);
             this.Controls.Add(this.btnEditConnection);
@@ -186,6 +199,7 @@
         private System.Windows.Forms.Button btnFindObjectsWithoutDescription;
         private System.Windows.Forms.ToolTip ttMain;
         private System.Windows.Forms.CheckBox chkFkToTableHyperLink;
+        private System.Windows.Forms.CheckBox chkCheckForDatabaseDesignIssues;
 	}
 }
 
