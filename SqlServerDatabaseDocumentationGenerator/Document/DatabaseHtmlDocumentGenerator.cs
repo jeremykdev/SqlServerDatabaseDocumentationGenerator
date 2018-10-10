@@ -43,6 +43,9 @@ namespace net.datacowboy.SqlServerDatabaseDocumentationGenerator.Document
 
 					hw.RenderBeginTag(HtmlTextWriterTag.Head);
 
+                    hw.AddAttribute("charset", "UTF-8");
+                    hw.RenderBeginTag(HtmlTextWriterTag.Meta);
+
 					hw.RenderBeginTag(HtmlTextWriterTag.Title);
 
 					hw.WriteEncodedText(db.DatabaseName); //TODO: does Write method escape HTML entities???
