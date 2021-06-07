@@ -40,9 +40,13 @@
             this.btnEditConnection = new System.Windows.Forms.Button();
             this.btnFindObjectsWithoutDescription = new System.Windows.Forms.Button();
             this.ttMain = new System.Windows.Forms.ToolTip(this.components);
-            this.chkFkToTableHyperLink = new System.Windows.Forms.CheckBox();
             this.chkCheckForDatabaseDesignIssues = new System.Windows.Forms.CheckBox();
+            this.chkFkToTableHyperLink = new System.Windows.Forms.CheckBox();
+            this.statusStripMain = new System.Windows.Forms.StatusStrip();
+            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderMainForm)).BeginInit();
+            this.statusStripMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblConnectionString
@@ -137,6 +141,17 @@
             this.btnFindObjectsWithoutDescription.UseVisualStyleBackColor = true;
             this.btnFindObjectsWithoutDescription.Click += new System.EventHandler(this.btnFindObjectsWithoutDescription_Click);
             // 
+            // chkCheckForDatabaseDesignIssues
+            // 
+            this.chkCheckForDatabaseDesignIssues.AutoSize = true;
+            this.chkCheckForDatabaseDesignIssues.Location = new System.Drawing.Point(16, 162);
+            this.chkCheckForDatabaseDesignIssues.Name = "chkCheckForDatabaseDesignIssues";
+            this.chkCheckForDatabaseDesignIssues.Size = new System.Drawing.Size(190, 17);
+            this.chkCheckForDatabaseDesignIssues.TabIndex = 7;
+            this.chkCheckForDatabaseDesignIssues.Text = "Check for Database Design Issues";
+            this.ttMain.SetToolTip(this.chkCheckForDatabaseDesignIssues, "Check for possible database design issues");
+            this.chkCheckForDatabaseDesignIssues.UseVisualStyleBackColor = true;
+            // 
             // chkFkToTableHyperLink
             // 
             this.chkFkToTableHyperLink.AutoSize = true;
@@ -149,22 +164,33 @@
             this.chkFkToTableHyperLink.Text = "Generate Foreign Key to Table Hyperlinks in Document";
             this.chkFkToTableHyperLink.UseVisualStyleBackColor = true;
             // 
-            // chkCheckForDatabaseDesignIssues
+            // statusStripMain
             // 
-            this.chkCheckForDatabaseDesignIssues.AutoSize = true;
-            this.chkCheckForDatabaseDesignIssues.Location = new System.Drawing.Point(16, 162);
-            this.chkCheckForDatabaseDesignIssues.Name = "chkCheckForDatabaseDesignIssues";
-            this.chkCheckForDatabaseDesignIssues.Size = new System.Drawing.Size(190, 17);
-            this.chkCheckForDatabaseDesignIssues.TabIndex = 7;
-            this.chkCheckForDatabaseDesignIssues.Text = "Check for Database Design Issues";
-            this.ttMain.SetToolTip(this.chkCheckForDatabaseDesignIssues, "Check for possible database design issues");
-            this.chkCheckForDatabaseDesignIssues.UseVisualStyleBackColor = true;
+            this.statusStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripProgressBar,
+            this.toolStripStatusLabel});
+            this.statusStripMain.Location = new System.Drawing.Point(0, 301);
+            this.statusStripMain.Name = "statusStripMain";
+            this.statusStripMain.Size = new System.Drawing.Size(635, 22);
+            this.statusStripMain.TabIndex = 11;
+            this.statusStripMain.Text = "fd";
+            // 
+            // toolStripProgressBar
+            // 
+            this.toolStripProgressBar.Name = "toolStripProgressBar";
+            this.toolStripProgressBar.Size = new System.Drawing.Size(100, 16);
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(601, 266);
+            this.ClientSize = new System.Drawing.Size(635, 323);
+            this.Controls.Add(this.statusStripMain);
             this.Controls.Add(this.chkCheckForDatabaseDesignIssues);
             this.Controls.Add(this.chkFkToTableHyperLink);
             this.Controls.Add(this.btnFindObjectsWithoutDescription);
@@ -180,6 +206,8 @@
             this.Text = "SQL Server Database Documentation";
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderMainForm)).EndInit();
+            this.statusStripMain.ResumeLayout(false);
+            this.statusStripMain.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,6 +228,9 @@
         private System.Windows.Forms.ToolTip ttMain;
         private System.Windows.Forms.CheckBox chkFkToTableHyperLink;
         private System.Windows.Forms.CheckBox chkCheckForDatabaseDesignIssues;
-	}
+        private System.Windows.Forms.StatusStrip statusStripMain;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+    }
 }
 

@@ -2,7 +2,7 @@ This project will allow you to create human readable documentation for a Microso
 
 Descriptions for objects are taken from extended properties with a name 'MS_Description' such as those created when descriptions provided to database objects using SQL Management Studio.
 
-To use this project build it using Visual Studio 2012 or later.  Then run the DocumentationGeneratorApplication program providing a connection string to your database and supplying a file name for the resulting documentation file.  The file will be an HTML file.
+To use this project build it using Visual Studio.  The projects are currently using .NET 4.8 but should work on 4.5 or later.  Then run the DocumentationGeneratorApplication program providing a connection string to your database and supplying a file name for the resulting documentation file.  The file will be an HTML file.
 
 An example of the resulting documentation file can be viewed at http://jeremykdev.github.io/SqlServerDatabaseDocumentationGenerator/AdventureWorks-sample.html
 

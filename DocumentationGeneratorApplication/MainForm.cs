@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Configuration;
 using net.datacowboy.SqlServerDatabaseDocumentationGenerator.Inspection;
@@ -14,6 +15,7 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 {
 	public partial class MainForm : Form
 	{
+        
 		public MainForm()
 		{
 			InitializeComponent();
@@ -128,9 +130,9 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 
 
 
-        private static Task<Database> getDatabaseMetaDataAysnc(string connectionString)
+        private Task<Database> getDatabaseMetaData(string connectionString)
         {
-            return Task<Database>.Factory.StartNew(() =>
+            return Task.Run(() =>
             {
                 var dbi = new DatabaseInspector(connectionString);
                 return dbi.GetDatabaseMetaData();
@@ -151,46 +153,63 @@ namespace net.datacowboy.DocumentationGeneratorApplication
             return config;
         }
 
-		private void btnGenerateDoc_Click(object sender, EventArgs e)
+		private async void btnGenerateDoc_Click(object sender, EventArgs e)
 		{
+            
+
             if (!this.validateFormInput(true))
-            {
                 return;
-            }
+            this.toolStripStatusLabel.Text = "Working";
+            this.toolStripProgressBar.Visible = true;
+            this.toolStripProgressBar.Style = ProgressBarStyle.Marquee;
 
             this.lockUi();
 
-            this.Cursor = Cursors.WaitCursor;
-            Application.DoEvents();
+            try
+            {
 
-            DocumentGeneratorConfiguration docGenConfig = this.createDocumentGeneratorConfigurationFroUi();
-
-            //perform database operations aysnc
-            var taskMeta = getDatabaseMetaDataAysnc(this.txtConnectionString.Text);
-
-            var metadata = taskMeta.Result;
-
-			DatabaseHtmlDocumentGenerator gen = new DatabaseHtmlDocumentGenerator();
-
-			string docFilePath = this.txtDocFile.Text.Trim();
-
-			using (var sw = new StreamWriter(docFilePath, false))
-			{
-				var str = gen.ExportToHtml(metadata, sw, docGenConfig);
-			}
+                string docFilePath = this.txtDocFile.Text.Trim();
 
 
+                DocumentGeneratorConfiguration docGenConfig = this.createDocumentGeneratorConfigurationFroUi();
 
-            this.Cursor = Cursors.Default;
-            Application.DoEvents();
+                //perform database operations aysnc
+                var metadata = await getDatabaseMetaData(this.txtConnectionString.Text);
 
-			if (this.chkOpenDoc.Checked && File.Exists(docFilePath))
-			{
-				Process.Start(docFilePath);
-			}
+                await this.generateDocument(metadata, docFilePath, docGenConfig);
+
+                this.toolStripProgressBar.Visible = false;
+                this.toolStripStatusLabel.Text = "Completed";
+
+                if (this.chkOpenDoc.Checked && File.Exists(docFilePath))
+                    Process.Start(docFilePath);
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK);
+            }
 
             this.unLockUi();
 		}
+
+        private async Task generateDocument(Database metadata, string docFilePath, DocumentGeneratorConfiguration docGenConfig)
+        { 
+            var task = new Task(() =>
+            {
+
+                DatabaseHtmlDocumentGenerator gen = new DatabaseHtmlDocumentGenerator();
+                using (var sw = new StreamWriter(docFilePath, false))
+                {
+                    var str = gen.ExportToHtml(metadata, sw, docGenConfig);
+                }
+
+                
+            });
+
+            task.Start();
+            await task;
+        }
 
         private void btnDocFileBrowse_Click(object sender, EventArgs e)
         {
@@ -226,31 +245,19 @@ namespace net.datacowboy.DocumentationGeneratorApplication
 
         }
 
-        private void btnFindObjectsWithoutDescription_Click(object sender, EventArgs e)
+        private async void btnFindObjectsWithoutDescription_Click(object sender, EventArgs e)
         {
             if (!this.validateFormInput(false))
-            {
                 return;
-            }
+            
 
             this.lockUi();
 
-            this.Cursor = Cursors.WaitCursor;
-
-            Application.DoEvents();
 
             //perform database operations aysnc
-            var taskMeta = getDatabaseMetaDataAysnc(this.txtConnectionString.Text);
+            var metadata = await getDatabaseMetaData(this.txtConnectionString.Text);
 
-            var metadata = taskMeta.Result;
-
-            
-
-
-
-            this.Cursor = Cursors.Default;
-            Application.DoEvents();
-
+           
             this.showObjectsWithoutDescriptionDialog(metadata);
 
             this.unLockUi();
@@ -272,7 +279,7 @@ namespace net.datacowboy.DocumentationGeneratorApplication
             this.txtDocFile.Enabled = false;
             this.btnDocFileBrowse.Enabled = false;
             this.btnEditConnection.Enabled = false;
-            this.btnGenerateDoc.Enabled = false;
+            //this.btnGenerateDoc.Enabled = false;
             this.btnFindObjectsWithoutDescription.Enabled = false;
             this.chkOpenDoc.Enabled = false;
             this.chkFkToTableHyperLink.Enabled = false;
